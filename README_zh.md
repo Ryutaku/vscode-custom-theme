@@ -14,6 +14,28 @@
 - 编辑区文字保持 I 形光标，普通工作台控件使用默认箭头。
 - Dark 与 Light 配置可以共存，也可以跟随 Windows 深浅色模式自动切换。
 
+## 效果截图
+
+### Atom One Dark
+
+| 编辑器整体效果 | 圆角菜单悬停效果 |
+|---|---|
+| ![Atom One Dark 编辑器整体效果](images/dark-overview.png) | ![Atom One Dark 圆角菜单悬停效果](images/dark-menu.png) |
+
+| 文本选区 | 当前词语边框 |
+|---|---|
+| ![Atom One Dark 文本选区](images/dark-editor-selection.png) | ![Atom One Dark 当前词语边框](images/dark-word-border.png) |
+
+### Atom One Light
+
+| 圆角菜单悬停效果 | 编辑器选区 |
+|---|---|
+| ![Atom One Light 圆角菜单悬停效果](images/light-menu.png) | ![Atom One Light 编辑器选区](images/light-editor-selection.png) |
+
+| 选区细节 | 当前词语边框 |
+|---|---|
+| ![Atom One Light 选区细节](images/light-selection-detail.png) | ![Atom One Light 当前词语边框](images/light-word-border.png) |
+
 ## 文件说明
 
 | 路径 | 用途 |

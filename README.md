@@ -14,6 +14,28 @@ A reusable VS Code customization for Atom One Dark and Atom One Light. It combin
 - Editor text keeps the I-beam cursor; ordinary workbench controls use the default arrow.
 - Theme colors coexist and can follow the Windows light/dark mode automatically.
 
+## Screenshots
+
+### Atom One Dark
+
+| Editor overview | Rounded menu hover |
+|---|---|
+| ![Atom One Dark editor overview](images/dark-overview.png) | ![Atom One Dark rounded menu hover](images/dark-menu.png) |
+
+| Selected text | Current-word border |
+|---|---|
+| ![Atom One Dark selected text](images/dark-editor-selection.png) | ![Atom One Dark current-word border](images/dark-word-border.png) |
+
+### Atom One Light
+
+| Rounded menu hover | Editor selection |
+|---|---|
+| ![Atom One Light rounded menu hover](images/light-menu.png) | ![Atom One Light editor selection](images/light-editor-selection.png) |
+
+| Selection detail | Current-word border |
+|---|---|
+| ![Atom One Light selection detail](images/light-selection-detail.png) | ![Atom One Light current-word border](images/light-word-border.png) |
+
 ## Included files
 
 | Path | Purpose |
