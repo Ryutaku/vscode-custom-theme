@@ -3,12 +3,12 @@ const vscode = require('vscode');
 function activate(context) {
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
+    textDecoration: 'none; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important;',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
   });
 
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
-    border: '1px solid',
-    borderColor: new vscode.ThemeColor('focusBorder'),
+    border: '1px solid var(--vscode-editor-wordHighlightBorder, var(--vscode-focusBorder))',
     borderRadius: '4px',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
   });
