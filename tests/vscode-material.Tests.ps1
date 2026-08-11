@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $scriptPath = Join-Path (Split-Path $PSScriptRoot -Parent) 'scripts\vscode-material.ps1'
 $testRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('vscode-custom-theme-test-' + [guid]::NewGuid().ToString('N'))
 $fixturePath = Join-Path $testRoot 'main.js'
-$original = 'let Qe=createOptions();Ve("code/willCreateCodeBrowserWindow"),this._win=new wr.BrowserWindow(Qe),Ve("code/didCreateCodeBrowserWindow");'
+$original = 'let Qe=createOptions();Ve("code/willCreateCodeBrowserWindow"),this._win=new wr.BrowserWindow(Qe),Ve("code/didCreateCodeBrowserWindow");class Theme{updateBackgroundColor(e,t){for(let r of Ui())if(r.id===e){r.setBackgroundColor(t.colorInfo.background);break}}}'
 
 try {
     New-Item -ItemType Directory -Path $testRoot | Out-Null
@@ -14,7 +14,10 @@ try {
     if (
         $acrylic -notmatch 'background-material=acrylic' -or
         $acrylic -notmatch 'Qe\.backgroundMaterial="acrylic"' -or
-        $acrylic -notmatch 'delete Qe\.backgroundColor'
+        $acrylic -notmatch 'delete Qe\.backgroundColor' -or
+        $acrylic -notmatch 'preserve-background-material=acrylic' -or
+        $acrylic -notmatch 'r\.setBackgroundMaterial\?\.\("acrylic"\)' -or
+        $acrylic -match 'r\.setBackgroundColor\(t\.colorInfo\.background\);break'
     ) {
         throw 'Acrylic patch was not applied as expected.'
     }
