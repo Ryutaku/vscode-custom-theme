@@ -14,6 +14,7 @@ try {
     if (
         $acrylic -notmatch 'background-material=acrylic' -or
         $acrylic -notmatch 'Qe\.backgroundMaterial="acrylic"' -or
+        $acrylic -notmatch 'Qe\.transparent=!0' -or
         $acrylic -notmatch 'delete Qe\.backgroundColor' -or
         $acrylic -notmatch 'preserve-background-material=acrylic' -or
         $acrylic -notmatch 'r\.setBackgroundMaterial\?\.\("acrylic"\)' -or
