@@ -172,20 +172,20 @@ body {
 }
 
 .monaco-workbench {
-    --vct-material-root: rgba(40, 44, 52, 0.78);
-    --vct-material-editor: rgba(40, 44, 52, 0.58);
-    --vct-material-side: rgba(33, 37, 43, 0.74);
-    --vct-material-chrome: rgba(33, 37, 43, 0.68);
+    --vct-material-root: rgba(40, 44, 52, 0.48);
+    --vct-material-editor: rgba(40, 44, 52, 0.10);
+    --vct-material-side: rgba(33, 37, 43, 0.26);
+    --vct-material-chrome: rgba(33, 37, 43, 0.20);
     --vct-material-popup: rgba(40, 44, 52, 0.92);
     background-color: var(--vct-material-root) !important;
 }
 
 .monaco-workbench.vs,
 body.vscode-light .monaco-workbench {
-    --vct-material-root: rgba(250, 250, 250, 0.86);
-    --vct-material-editor: rgba(250, 250, 250, 0.72);
-    --vct-material-side: rgba(242, 242, 242, 0.80);
-    --vct-material-chrome: rgba(245, 245, 245, 0.76);
+    --vct-material-root: rgba(250, 250, 250, 0.66);
+    --vct-material-editor: rgba(250, 250, 250, 0.12);
+    --vct-material-side: rgba(242, 242, 242, 0.22);
+    --vct-material-chrome: rgba(245, 245, 245, 0.16);
     --vct-material-popup: rgba(250, 250, 250, 0.94);
 }
 
