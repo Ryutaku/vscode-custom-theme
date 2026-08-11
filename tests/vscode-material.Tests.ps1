@@ -11,7 +11,11 @@ try {
 
     & $scriptPath acrylic -MainJsPath $fixturePath | Out-Null
     $acrylic = [System.IO.File]::ReadAllText($fixturePath)
-    if ($acrylic -notmatch 'background-material=acrylic' -or $acrylic -notmatch 'Qe\.backgroundMaterial="acrylic"') {
+    if (
+        $acrylic -notmatch 'background-material=acrylic' -or
+        $acrylic -notmatch 'Qe\.backgroundMaterial="acrylic"' -or
+        $acrylic -notmatch 'delete Qe\.backgroundColor'
+    ) {
         throw 'Acrylic patch was not applied as expected.'
     }
 

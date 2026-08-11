@@ -77,7 +77,7 @@ These are intentionally opinionated usability adjustments rather than a claim th
 
 ## Windows Mica and Acrylic
 
-The material layer is optional and intended for Windows 11. VS Code does not currently expose Electron's native background material as a setting, so the script applies one small, marked change to the active installation's `out/main.js`. It creates a safety backup beside that file and never restores the whole backup during a normal disable operation, so unrelated modifications are preserved.
+The material layer is optional and intended for Windows 11. VS Code does not currently expose Electron's native background material as a setting, so the script applies one small, marked change to the active installation's `out/main.js`. The change enables the selected material and removes VS Code's solid startup background color so that the material can remain visible behind transparent workbench surfaces. It creates a safety backup beside that file and never restores the whole backup during a normal disable operation, so unrelated modifications are preserved.
 
 Open PowerShell in this repository and choose a mode:
 

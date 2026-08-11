@@ -11,7 +11,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$patchPattern = '/\* vscode-custom-theme:background-material=(?<mode>acrylic|mica|tabbed|auto) \*/(?<options>[A-Za-z_$][\w$]*)\.backgroundMaterial="(?<value>acrylic|mica|tabbed|auto)",'
+$patchPattern = '/\* vscode-custom-theme:background-material=(?<mode>acrylic|mica|tabbed|auto) \*/(?<options>[A-Za-z_$][\w$]*)\.backgroundMaterial="(?<value>acrylic|mica|tabbed|auto)",(?:delete \k<options>\.backgroundColor,)?'
 $windowPattern = '(?<prefix>[A-Za-z_$][\w$]*\("code/willCreateCodeBrowserWindow"\),)(?<assignment>this\._win=new [A-Za-z_$][\w$]*\.BrowserWindow\((?<options>[A-Za-z_$][\w$]*)\))'
 
 function Resolve-MainJsPath {
@@ -133,7 +133,7 @@ if ($windowMatches.Count -ne 1) {
 
 $match = $windowMatches[0]
 $optionsName = $match.Groups['options'].Value
-$injection = "/* vscode-custom-theme:background-material=$Mode */$optionsName.backgroundMaterial=`"$Mode`","
+$injection = "/* vscode-custom-theme:background-material=$Mode */$optionsName.backgroundMaterial=`"$Mode`",delete $optionsName.backgroundColor,"
 $replacement = $match.Groups['prefix'].Value + $injection + $match.Groups['assignment'].Value
 $updated = $source.Substring(0, $match.Index) + $replacement + $source.Substring($match.Index + $match.Length)
 
