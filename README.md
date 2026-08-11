@@ -1,6 +1,6 @@
 # vscode-custom-theme
 
-A theme-neutral desktop interaction layer for VS Code. It no longer overrides theme colors; it only refines mouse cursors, word hit-testing, and rounded interaction states. It can be used with Atom One, VSCode Vibrancy Continued, or any other theme.
+A mostly theme-neutral desktop interaction layer for VS Code. It refines mouse cursors, word hit-testing, and rounded interaction states, with one deliberate color exception: selected text is white in dark mode for clear contrast. It can be used with Atom One, VSCode Vibrancy Continued, or any other theme.
 
 [中文说明](README_zh.md)
 
@@ -10,7 +10,7 @@ VS Code is a desktop application, yet buttons, menus, tabs, and toolbar actions 
 
 The editor also has a few imprecise interaction details: clicking a word produces a sharp rectangular border, built-in occurrence highlighting marks matching words elsewhere, and the full-width Chinese colon `：` is not always treated as the desired word boundary.
 
-This repository addresses only those interaction issues and leaves all color decisions to the active theme.
+This repository addresses only those interaction issues and does not redefine the theme palette; white selected text in dark mode is the sole color exception.
 
 ## Features
 
@@ -19,7 +19,7 @@ This repository addresses only those interaction issues and leaves all color dec
 - Clicking a word frames only the instance at the caret.
 - The full-width Chinese colon `：` acts as a word separator, so clicking `root` in `账号密码：root` does not include the preceding label.
 - Current-word borders, text selections, and menu hover states have rounded corners.
-- Menu, selection, text, cursor, and border colors are inherited from the active VS Code theme.
+- Selected text is forced to white in dark themes; selection backgrounds, menus, cursors, and borders still inherit the active VS Code theme.
 - No `workbench.colorCustomizations`, `editor.tokenColorCustomizations`, or automatic theme switching is included.
 
 ## Included files

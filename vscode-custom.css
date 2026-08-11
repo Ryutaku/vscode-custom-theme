@@ -162,3 +162,9 @@ select * {
 .monaco-editor .selected-text {
     border-radius: 4px !important;
 }
+
+/* 深色主题下保证选中文字与选区背景有清晰对比 */
+.monaco-workbench.vs-dark .monaco-editor .view-lines .view-line span.inline-selected-text {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
