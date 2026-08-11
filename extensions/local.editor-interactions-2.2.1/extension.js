@@ -121,6 +121,58 @@ function activate(context) {
     return wordRange?.isEqual(selectedRange) ? selectedRange : undefined;
   };
 
+  const getMatchingWordRanges = (editor, selectedWordRanges) => {
+    const selectedKeys = new Set(
+      selectedWordRanges.map(
+        (range) =>
+          `${range.start.line}:${range.start.character}-${range.end.line}:${range.end.character}`
+      )
+    );
+    const words = [
+      ...new Set(
+        selectedWordRanges
+          .map((range) => editor.document.getText(range))
+          .filter(Boolean)
+      ),
+    ];
+    const matches = [];
+    const matchKeys = new Set();
+
+    for (const word of words) {
+      for (let lineNumber = 0; lineNumber < editor.document.lineCount; lineNumber += 1) {
+        const line = editor.document.lineAt(lineNumber).text;
+        let searchFrom = 0;
+        while (searchFrom <= line.length - word.length) {
+          const index = line.indexOf(word, searchFrom);
+          if (index === -1) {
+            break;
+          }
+
+          const end = index + word.length;
+          const before = getPreviousCodePoint(line, index);
+          const after = getCodePointAt(line, end);
+          const hasWordBoundaries =
+            (!before || isWordSeparator(before.character)) &&
+            (!after || isWordSeparator(after.character));
+          const key = `${lineNumber}:${index}-${lineNumber}:${end}`;
+          if (
+            hasWordBoundaries &&
+            !selectedKeys.has(key) &&
+            !matchKeys.has(key)
+          ) {
+            matches.push(
+              new vscode.Range(lineNumber, index, lineNumber, end)
+            );
+            matchKeys.add(key);
+          }
+          searchFrom = end;
+        }
+      }
+    }
+
+    return matches;
+  };
+
   const updateSelection = (editor) => {
     if (!editor) {
       return;
@@ -152,7 +204,13 @@ function activate(context) {
           .map((selection) => getWordRangeAtCursor(editor, selection))
           .filter(Boolean)
       : [];
-    editor.setDecorations(currentWordStyle, currentWordRanges);
+    const matchingWordRanges = hasMouseWordSelection
+      ? getMatchingWordRanges(editor, selectedWordRanges)
+      : [];
+    editor.setDecorations(
+      currentWordStyle,
+      currentWordRanges.concat(matchingWordRanges)
+    );
   };
 
   context.subscriptions.push(
@@ -187,6 +245,15 @@ function activate(context) {
       if (event.affectsConfiguration('editor.wordSeparators')) {
         updateSelection(vscode.window.activeTextEditor);
       }
+    }),
+    vscode.workspace.onDidChangeTextDocument((event) => {
+      vscode.window.visibleTextEditors
+        .filter((editor) => editor.document === event.document)
+        .forEach((editor) => {
+          editorsWithMouseWordFrame.delete(editor);
+          editorsWithMouseWordSelection.delete(editor);
+          updateSelection(editor);
+        });
     }),
     vscode.window.onDidChangeActiveColorTheme(() => {
       vscode.window.visibleTextEditors.forEach(updateSelection);

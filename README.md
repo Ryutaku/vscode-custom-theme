@@ -30,13 +30,13 @@ This repository addresses only those interaction issues. It does not redefine sy
 |---|---|
 | `vscode-custom.css` | Workbench cursor and rounded interaction styles |
 | `settings-snippet.jsonc` | Word-boundary, occurrence-highlight, and custom-menu settings |
-| `extensions/local.editor-interactions-2.2.0/` | Local extension for settings-driven click, word-selection, and dark-theme selection styling |
+| `extensions/local.editor-interactions-2.2.1/` | Local extension for settings-driven click, word-selection, matching-word, and dark-theme selection styling |
 
 ## Installation
 
 1. Clone or download this repository.
 2. Merge `settings-snippet.jsonc` into your VS Code user `settings.json`; do not replace the entire settings file.
-3. Copy `extensions/local.editor-interactions-2.2.0` into `%USERPROFILE%\.vscode\extensions\`.
+3. Copy `extensions/local.editor-interactions-2.2.1` into `%USERPROFILE%\.vscode\extensions\`.
 4. Choose one CSS loading method.
 
 ### Load with VSCode Vibrancy Continued
@@ -77,5 +77,5 @@ The CSS relies on VS Code's workbench DOM and may require selector updates after
 - This repository does not require or install any color theme.
 - Dark themes use `#4399F9` / `#033E5D` for the current word, `#2B2D30` for the current line, `#214283` for selections, and `#2A4371` for hovered menu items. Selected text is white. Light themes retain their own interaction colors.
 - Current-word punctuation boundaries come exclusively from `editor.wordSeparators`; whitespace remains a natural boundary. Edit that setting to decide whether characters such as `_` or `$` split a word.
-- `editor.selectionHighlight: true` keeps matching instances visible after a word selection; the CSS gives those matches the single-click border/background without changing their text colors.
+- `editor.selectionHighlight: false` disables VS Code's theme-colored selection matches. The local extension finds exact matching words and draws them with the single-click border/background without changing their text colors.
 - `editor.occurrencesHighlight: "off"` disables automatic highlighting of matching words elsewhere; this is part of the “current word only” behavior.

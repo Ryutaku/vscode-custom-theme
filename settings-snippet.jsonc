@@ -1,7 +1,8 @@
 {
     // 半角标点、常见中文标点和全角 ASCII 标点均作为词语边界
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?，。；：！？、（）【】［］｛｝《》〈〉“”‘’「」『』〔〕…—·～￥＂＃＄％＆＇＊＋－．／＜＝＞＠＼＾＿｀｜",
-    "editor.selectionHighlight": true,
+    // 关闭原生相同词底色，由本地扩展绘制与单击词一致的边框和底色
+    "editor.selectionHighlight": false,
     "editor.occurrencesHighlight": "off",
 
     // 自定义菜单 DOM 允许鼠标指针和圆角规则生效
