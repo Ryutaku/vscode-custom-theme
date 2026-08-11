@@ -8,7 +8,7 @@ function activate(context) {
 
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
     border: '1px solid',
-    borderColor: new vscode.ThemeColor('editor.wordHighlightBorder'),
+    borderColor: new vscode.ThemeColor('focusBorder'),
     borderRadius: '4px',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
   });

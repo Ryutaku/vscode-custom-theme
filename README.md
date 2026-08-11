@@ -28,13 +28,13 @@ This repository addresses only those interaction issues and does not redefine th
 |---|---|
 | `vscode-custom.css` | Workbench cursor and rounded interaction styles |
 | `settings-snippet.jsonc` | Word-boundary, occurrence-highlight, and custom-menu settings |
-| `extensions/local.editor-interactions-2.1.0/` | Local extension for precise current-word framing and white selected text in dark themes |
+| `extensions/local.editor-interactions-2.1.1/` | Local extension for precise current-word framing and white selected text in dark themes |
 
 ## Installation
 
 1. Clone or download this repository.
 2. Merge `settings-snippet.jsonc` into your VS Code user `settings.json`; do not replace the entire settings file.
-3. Copy `extensions/local.editor-interactions-2.1.0` into `%USERPROFILE%\.vscode\extensions\`.
+3. Copy `extensions/local.editor-interactions-2.1.1` into `%USERPROFILE%\.vscode\extensions\`.
 4. Choose one CSS loading method.
 
 ### Load with VSCode Vibrancy Continued
@@ -73,5 +73,5 @@ The CSS relies on VS Code's workbench DOM and may require selector updates after
 ## Notes
 
 - This repository does not require or install any color theme.
-- The local extension uses the active theme's `editor.wordHighlightBorder` for the current-word frame and applies a white-text decoration to actual selections only in dark/high-contrast-dark modes.
+- The local extension uses the active theme's always-available `focusBorder` for the current-word frame and applies a white-text decoration to actual selections only in dark/high-contrast-dark modes.
 - `editor.occurrencesHighlight: "off"` disables automatic highlighting of matching words elsewhere; this is part of the “current word only” behavior.

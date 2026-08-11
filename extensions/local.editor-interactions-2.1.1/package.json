@@ -2,7 +2,7 @@
   "name": "editor-interactions",
   "displayName": "Editor Interaction Refinements",
   "description": "Adds precise current-word framing and white selected text in dark themes.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "publisher": "local",
   "engines": {
     "vscode": "^1.90.0"
