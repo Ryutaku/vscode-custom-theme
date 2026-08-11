@@ -1,93 +1,77 @@
 # vscode-custom-theme
 
-一套可复用的 VS Code Atom One Dark / Atom One Light 双主题定制，包含按主题分别配置的配色、圆角菜单悬停状态、桌面式鼠标指针、按主题作用域设置的选中文字颜色，以及精确的当前词语边框。
+一套与主题无关的 VS Code 桌面交互增强。它不再覆盖任何主题颜色，只处理鼠标指针、文本命中范围和圆角交互细节，可与 Atom One、VSCode Vibrancy Continued 或其他任意主题共同使用。
 
 [English README](README.md)
 
 ## 为什么做这个仓库
 
-这个仓库源于我在长期使用 VS Code 过程中一直没有适应的两类体验问题。
+VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具栏等大量位置沿用网页常见的手形指针。即使使用多年，这种表现依然不符合传统桌面软件的操作直觉。
 
-### 1. 桌面应用大量沿用了 Web 页面的鼠标指针习惯
+编辑区也有一些细节不够精确：单击词语时的边框是直角；内置出现位置高亮会同时标出其他同词内容；中文全角冒号 `：` 默认又不一定符合期望的词语边界。
 
-VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页、工具栏操作等大量位置沿用了 Web 页面的交互习惯：鼠标悬停时显示手形指针。这种表现始终让我觉得不符合桌面软件的操作直觉。即使已经使用 VS Code 十来年，我依然没有习惯。
-
-这套配置把普通工作台控件统一恢复为箭头指针；编辑区文字仍保留 I 形光标，Ctrl+单击“转到定义”等真正具有导航含义的交互也继续保留手形指针。
-
-### 2. 喜欢 Atom One Dark / Light，但交互细节仍有不足
-
-Atom One Dark 和 Atom One Light 是我比较喜欢的两款主题配色，但编辑区域的一些状态细节仍不够理想。例如，鼠标单击某个词时出现的是直角边框，与 VS Code 整体逐渐采用的圆角视觉风格不协调；文本选中、焦点和当前词高亮之间的边界也不够清晰，容易影响对“究竟选中了什么”的判断。
-
-这个仓库针对这些细节进行了调整：当前词边框改为圆角，选区背景和选中文字更加清晰，并分别为 Dark / Light 主题整理了更一致的菜单、焦点、光标和高亮配色。
-
-这些修改带有明确的个人使用偏好，并不意味着适合所有人。欢迎大家实际试用，在日常操作中自行体会，也可以按自己的习惯继续调整。
+本仓库只解决这些交互痛点，不再与主题争夺颜色控制权。
 
 ## 功能
 
-- Atom One Dark 保留主题本身的蓝色基调，同时让交互状态更清晰。
-- Atom One Light 使用绿色界面色，编辑区选区和光标使用深黄色。
-- 菜单悬停项使用圆角背景，父菜单不会错误地给整个子菜单着色。
-- 两套主题下的编辑区选中文字均为纯白色。
-- 单击词语时只框住当前实例，并关闭 VS Code 对其他同词位置的内置自动高亮；中文全角冒号 `：` 会被正确识别为词语边界。
-- 编辑区文字保持 I 形光标，普通工作台控件使用默认箭头；Ctrl+单击“转到定义”等真正的导航操作仍保留手形指针。
-- Dark 与 Light 配置可以共存，也可以跟随 Windows 深浅色模式自动切换。
-
-## 效果截图
-
-### Atom One Dark
-
-| 编辑器整体效果 | 圆角菜单悬停效果 |
-|---|---|
-| ![Atom One Dark 编辑器整体效果](images/dark-overview.png) | ![Atom One Dark 圆角菜单悬停效果](images/dark-menu.png) |
-
-| 文本选区 | 当前词语边框 |
-|---|---|
-| ![Atom One Dark 文本选区](images/dark-editor-selection.png) | ![Atom One Dark 当前词语边框](images/dark-word-border.png) |
-
-### Atom One Light
-
-| 圆角菜单悬停效果 | 编辑器选区 |
-|---|---|
-| ![Atom One Light 圆角菜单悬停效果](images/light-menu.png) | ![Atom One Light 编辑器选区](images/light-editor-selection.png) |
-
-| 选区细节 | 当前词语边框 |
-|---|---|
-| ![Atom One Light 选区细节](images/light-selection-detail.png) | ![Atom One Light 当前词语边框](images/light-word-border.png) |
+- 普通工作台控件使用默认箭头指针。
+- 编辑文本保留 I 形指针，Ctrl+单击“转到定义”等真实导航仍使用手形指针。
+- 单击词语时只框住光标所在的当前实例。
+- 中文全角冒号 `：` 被识别为词语分隔符，例如单击 `账号密码：root` 中的 `root` 不会框住前半段。
+- 当前词边框、文本选区和菜单悬停状态使用圆角。
+- 菜单背景、选区、文字、光标和边框颜色全部继承当前 VS Code 主题。
+- 不包含 `workbench.colorCustomizations`、`editor.tokenColorCustomizations` 或主题自动切换配置。
 
 ## 文件说明
 
 | 路径 | 用途 |
 |---|---|
-| `vscode-custom.css` | 工作台鼠标指针、菜单、圆角和编辑区视觉样式 |
-| `settings-snippet.jsonc` | 需要合并进 VS Code 用户设置的主题配置片段 |
-| `extensions/local.selection-white-1.2.1/` | 实现主题感知选区文字和精确当前词边框的本地扩展 |
+| `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
+| `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
+| `extensions/local.precise-current-word-2.0.0/` | 只框住光标所在词语的本地扩展 |
 
 ## 安装
 
-1. 安装 [Atom One Dark Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onedark)、[Atom One Light Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onelight) 和 [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css)。
-2. 克隆或下载本仓库。
-3. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-4. 把 `vscode_custom_css.imports` 改为本机 `vscode-custom.css` 的绝对 `file:///` URL。
-5. 将 `extensions/local.selection-white-1.2.1` 复制到 `%USERPROFILE%\.vscode\extensions\`。
-6. 在命令面板执行 **Enable Custom CSS and JS** 或 **Reload Custom CSS and JS**。
-7. 执行 **Developer: Reload Window**。
+1. 克隆或下载本仓库。
+2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
+3. 将 `extensions/local.precise-current-word-2.0.0` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+4. 选择一种 CSS 加载方式。
 
-## 配色
+### 使用 VSCode Vibrancy Continued 加载
 
-| 场景 | Atom One Dark | Atom One Light |
-|---|---:|---:|
-| 主色 | `#0078D4` | `#198754` |
-| 菜单悬停 | `#2B50AA` | `#D1E7DD` |
-| 编辑区选区 | `#2B50AA` | `#E09D00` |
-| 光标与当前词边框 | `#0078D4` | `#E09D00` |
+在 `settings.json` 中加入：
+
+```jsonc
+"vscode_vibrancy.imports": [
+    "D:/path/to/vscode-custom-theme/vscode-custom.css"
+]
+```
+
+执行 **Reload Vibrancy**，彻底退出并重新启动 VS Code。
+
+### 使用 Custom CSS and JS Loader 加载
+
+在 `settings.json` 中加入：
+
+```jsonc
+"vscode_custom_css.imports": [
+    "file:///D:/path/to/vscode-custom-theme/vscode-custom.css"
+],
+"vscode_custom_css.policy": true
+```
+
+执行 **Enable Custom CSS and JS** 或 **Reload Custom CSS and JS**，然后执行 **Developer: Reload Window**。
+
+只选择一种加载方式，避免同一份 CSS 被重复注入。
 
 ## VS Code 升级
 
-VS Code 升级会覆盖生成的 `workbench.html`，但不会影响本仓库中的源文件。升级后重新执行 **Reload Custom CSS and JS**，然后重启 VS Code 即可。
+VS Code 升级可能覆盖 CSS 加载器或 Vibrancy 写入的工作台文件，但不会影响仓库源文件。升级后重新执行对应加载器的 Reload 命令并重启 VS Code。
 
 自定义 CSS 依赖 VS Code 工作台 DOM；如果未来大版本调整界面结构，部分选择器可能需要同步更新。
 
 ## 说明
 
-- `settings-snippet.jsonc` 只包含本次定制相关设置，已排除账号、密码、许可证、服务器地址和命令历史等私人信息。
-- 本地扩展会关闭内置的符号出现位置高亮，并依据 `editor.wordSeparators` 绘制精确的当前词边框。
+- 本仓库不指定或安装任何配色主题。
+- 本地扩展使用当前主题的 `editor.wordHighlightBorder` 颜色，不提供自定义色值。
+- `editor.occurrencesHighlight: "off"` 会关闭其他同词位置的自动高亮，这是实现“只框当前词”的一部分。

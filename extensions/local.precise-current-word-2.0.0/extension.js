@@ -1,11 +1,6 @@
 const vscode = require('vscode');
 
 function activate(context) {
-  const selectedTextStyle = vscode.window.createTextEditorDecorationType({
-    color: new vscode.ThemeColor('selectionWhite.selectedForeground'),
-    rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
-  });
-
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
     border: '1px solid',
     borderColor: new vscode.ThemeColor('editor.wordHighlightBorder'),
@@ -56,11 +51,6 @@ function activate(context) {
       return;
     }
 
-    const selectedRanges = editor.selections
-      .filter((selection) => !selection.isEmpty)
-      .map((selection) => new vscode.Range(selection.start, selection.end));
-    editor.setDecorations(selectedTextStyle, selectedRanges);
-
     const currentWordRanges = editor.selections
       .map((selection) => getWordRangeAtCursor(editor, selection))
       .filter(Boolean);
@@ -68,7 +58,6 @@ function activate(context) {
   };
 
   context.subscriptions.push(
-    selectedTextStyle,
     currentWordStyle,
     vscode.window.onDidChangeTextEditorSelection((event) => {
       updateSelection(event.textEditor);

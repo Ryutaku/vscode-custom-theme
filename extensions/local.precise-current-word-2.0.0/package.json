@@ -1,0 +1,17 @@
+{
+  "name": "precise-current-word",
+  "displayName": "Precise Current Word",
+  "description": "Frames only the word at the caret using the active theme's word-highlight border color.",
+  "version": "2.0.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js"
+}

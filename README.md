@@ -1,93 +1,77 @@
 # vscode-custom-theme
 
-A reusable VS Code customization for Atom One Dark and Atom One Light. It combines theme-scoped colors, rounded menu hover states, desktop-style mouse cursors, theme-scoped selected-text foregrounds, and precise word highlighting.
+A theme-neutral desktop interaction layer for VS Code. It no longer overrides theme colors; it only refines mouse cursors, word hit-testing, and rounded interaction states. It can be used with Atom One, VSCode Vibrancy Continued, or any other theme.
 
 [中文说明](README_zh.md)
 
 ## Why this repository exists
 
-This repository grew out of two long-standing VS Code usability pain points.
+VS Code is a desktop application, yet buttons, menus, tabs, and toolbar actions often use the web-style pointing-hand cursor. Even after years of use, that behavior can feel out of place in a traditional desktop interface.
 
-### 1. A desktop application that often feels like a web page
+The editor also has a few imprecise interaction details: clicking a word produces a sharp rectangular border, built-in occurrence highlighting marks matching words elsewhere, and the full-width Chinese colon `：` is not always treated as the desired word boundary.
 
-VS Code is a desktop application, but many parts of its interface copy the web convention of showing a pointing-hand cursor over buttons, menus, tabs, toolbar actions, and similar controls. That behavior has always felt out of place to me. Even after using VS Code for more than a decade, I still have not grown comfortable with it.
-
-This customization restores a desktop-style interaction model: ordinary workbench controls use the default arrow, editable text keeps the I-beam, and genuine navigation interactions such as Ctrl+click “go to definition” can still use the pointer.
-
-### 2. Great Atom One themes with interaction details left unfinished
-
-Atom One Dark and Atom One Light are two of my favorite VS Code color themes, but their editor interaction states still leave room for improvement. For example, clicking a word produces a sharp rectangular border that feels inconsistent with VS Code's rounded visual language. Text selection, focus, and current-word highlighting can also look too similar, making it harder to judge exactly what is selected or focused.
-
-This repository refines those details with rounded current-word borders, clearer selection colors, theme-scoped selected-text foregrounds, and more coherent menu, focus, cursor, and highlight states for both themes.
-
-These are intentionally opinionated usability adjustments rather than a claim that one visual style fits everyone. Try them in daily use, compare the interaction states yourself, and adapt the settings to your own preferences.
+This repository addresses only those interaction issues and leaves all color decisions to the active theme.
 
 ## Features
 
-- Atom One Dark keeps its blue accent character while making interaction states clearer.
-- Atom One Light uses a green UI palette with a deep-yellow editor selection and cursor.
-- Menu items use rounded hover backgrounds while submenus remain correctly scoped.
-- Editor selection text stays white in both themes.
-- Clicking a word frames only the current instance; the built-in highlighting of other occurrences is disabled. Text separated by the full-width Chinese colon `：` is handled correctly.
-- Editor text keeps the I-beam cursor; ordinary workbench controls use the default arrow, while genuine navigation actions such as Ctrl+click keep the pointer.
-- Theme colors coexist and can follow the Windows light/dark mode automatically.
-
-## Screenshots
-
-### Atom One Dark
-
-| Editor overview | Rounded menu hover |
-|---|---|
-| ![Atom One Dark editor overview](images/dark-overview.png) | ![Atom One Dark rounded menu hover](images/dark-menu.png) |
-
-| Selected text | Current-word border |
-|---|---|
-| ![Atom One Dark selected text](images/dark-editor-selection.png) | ![Atom One Dark current-word border](images/dark-word-border.png) |
-
-### Atom One Light
-
-| Rounded menu hover | Editor selection |
-|---|---|
-| ![Atom One Light rounded menu hover](images/light-menu.png) | ![Atom One Light editor selection](images/light-editor-selection.png) |
-
-| Selection detail | Current-word border |
-|---|---|
-| ![Atom One Light selection detail](images/light-selection-detail.png) | ![Atom One Light current-word border](images/light-word-border.png) |
+- Ordinary workbench controls use the default arrow cursor.
+- Editable text keeps the I-beam; genuine navigation such as Ctrl+click “go to definition” keeps the pointer.
+- Clicking a word frames only the instance at the caret.
+- The full-width Chinese colon `：` acts as a word separator, so clicking `root` in `账号密码：root` does not include the preceding label.
+- Current-word borders, text selections, and menu hover states have rounded corners.
+- Menu, selection, text, cursor, and border colors are inherited from the active VS Code theme.
+- No `workbench.colorCustomizations`, `editor.tokenColorCustomizations`, or automatic theme switching is included.
 
 ## Included files
 
 | Path | Purpose |
 |---|---|
-| `vscode-custom.css` | Workbench cursor, menu, rounded-corner, and editor visual overrides |
-| `settings-snippet.jsonc` | Theme-scoped VS Code settings to merge into the user settings file |
-| `extensions/local.selection-white-1.2.1/` | Local extension for theme-aware selected text and exact current-word borders |
+| `vscode-custom.css` | Workbench cursor and rounded interaction styles |
+| `settings-snippet.jsonc` | Word-boundary, occurrence-highlight, and custom-menu settings |
+| `extensions/local.precise-current-word-2.0.0/` | Local extension that frames only the word at the caret |
 
 ## Installation
 
-1. Install the [Atom One Dark Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onedark), [Atom One Light Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onelight), and [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css).
-2. Clone or download this repository.
-3. Merge the contents of `settings-snippet.jsonc` into your VS Code user `settings.json`. Do not replace your complete settings file.
-4. Change `vscode_custom_css.imports` to the absolute `file:///` URL of your local `vscode-custom.css`.
-5. Copy `extensions/local.selection-white-1.2.1` into `%USERPROFILE%\.vscode\extensions\`.
-6. Run **Enable Custom CSS and JS** or **Reload Custom CSS and JS** from the command palette.
-7. Run **Developer: Reload Window**.
+1. Clone or download this repository.
+2. Merge `settings-snippet.jsonc` into your VS Code user `settings.json`; do not replace the entire settings file.
+3. Copy `extensions/local.precise-current-word-2.0.0` into `%USERPROFILE%\.vscode\extensions\`.
+4. Choose one CSS loading method.
 
-## Palette
+### Load with VSCode Vibrancy Continued
 
-| Context | Atom One Dark | Atom One Light |
-|---|---:|---:|
-| Main accent | `#0078D4` | `#198754` |
-| Menu hover | `#2B50AA` | `#D1E7DD` |
-| Editor selection | `#2B50AA` | `#E09D00` |
-| Cursor and current-word border | `#0078D4` | `#E09D00` |
+Add this to `settings.json`:
+
+```jsonc
+"vscode_vibrancy.imports": [
+    "D:/path/to/vscode-custom-theme/vscode-custom.css"
+]
+```
+
+Run **Reload Vibrancy**, fully exit VS Code, and start it again.
+
+### Load with Custom CSS and JS Loader
+
+Add this to `settings.json`:
+
+```jsonc
+"vscode_custom_css.imports": [
+    "file:///D:/path/to/vscode-custom-theme/vscode-custom.css"
+],
+"vscode_custom_css.policy": true
+```
+
+Run **Enable Custom CSS and JS** or **Reload Custom CSS and JS**, then run **Developer: Reload Window**.
+
+Choose only one loading method so the same CSS is not injected twice.
 
 ## VS Code upgrades
 
-VS Code upgrades replace the generated `workbench.html`. The source files in this repository remain valid. After an upgrade, run **Reload Custom CSS and JS** again and restart VS Code.
+A VS Code upgrade may replace workbench files patched by the CSS loader or Vibrancy, but it does not change this repository. After upgrading, run the relevant loader's Reload command and restart VS Code.
 
-Custom CSS selectors depend on VS Code's workbench DOM and may need adjustment after a major UI change.
+The CSS relies on VS Code's workbench DOM and may require selector updates after a major UI change.
 
 ## Notes
 
-- `settings-snippet.jsonc` contains only settings related to this customization; it intentionally excludes accounts, credentials, license values, server addresses, and command history.
-- The local extension disables the built-in occurrence highlight and replaces it with a precise word border based on `editor.wordSeparators`.
+- This repository does not require or install any color theme.
+- The local extension uses the active theme's `editor.wordHighlightBorder` color and defines no custom color value.
+- `editor.occurrencesHighlight: "off"` disables automatic highlighting of matching words elsewhere; this is part of the “current word only” behavior.

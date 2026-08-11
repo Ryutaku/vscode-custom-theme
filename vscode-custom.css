@@ -121,25 +121,14 @@ select * {
     cursor: pointer !important;
 }
 
-/* ===== 菜单悬停项：强制使用主题蓝 ===== */
+/* ===== 菜单悬停项：仅补充圆角，颜色完全交给当前主题 ===== */
 .monaco-menu .monaco-action-bar .action-item.focused > .action-menu-item,
 .monaco-menu .monaco-action-bar .action-item:hover > .action-menu-item,
 .monaco-menu-option:hover,
 .monaco-menu-option:focus,
 .monaco-menu-option.focused,
 .monaco-menu-option[aria-selected="true"] {
-    background-color: var(--vscode-menu-selectionBackground) !important;
-    color: var(--vscode-menu-selectionForeground) !important;
     border-radius: 5px !important;
-}
-
-.monaco-menu .action-item.focused > .action-menu-item *,
-.monaco-menu .action-item:hover > .action-menu-item *,
-.monaco-menu-option:hover *,
-.monaco-menu-option:focus *,
-.monaco-menu-option.focused *,
-.monaco-menu-option[aria-selected="true"] * {
-    color: var(--vscode-menu-selectionForeground) !important;
 }
 
 /* ===== 单词高亮圆角边框 ===== */
@@ -152,11 +141,4 @@ select * {
 /* selection rounded corners */
 .monaco-editor .selected-text {
     border-radius: 4px !important;
-}
-
-/* 选中文字强制为纯白色。Monaco 给选中文字使用的是
-   inline-selected-text，而 selected-text 只是选区背景层。 */
-.monaco-editor .view-lines .view-line span.inline-selected-text {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
 }
