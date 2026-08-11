@@ -1,6 +1,8 @@
 const vscode = require('vscode');
 
 function activate(context) {
+  const unicodeBoundaryPattern = /[\s\p{P}\p{S}]/u;
+
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
     backgroundColor: '#214283',
@@ -23,7 +25,36 @@ function activate(context) {
     const separators = vscode.workspace
       .getConfiguration('editor')
       .get('wordSeparators', "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?：");
-    return /\s/u.test(character) || separators.includes(character);
+    return unicodeBoundaryPattern.test(character) || separators.includes(character);
+  };
+
+  const getCodePointAt = (text, index) => {
+    if (index < 0 || index >= text.length) {
+      return undefined;
+    }
+
+    let start = index;
+    const codeUnit = text.charCodeAt(start);
+    if (codeUnit >= 0xdc00 && codeUnit <= 0xdfff && start > 0) {
+      const previousCodeUnit = text.charCodeAt(start - 1);
+      if (previousCodeUnit >= 0xd800 && previousCodeUnit <= 0xdbff) {
+        start -= 1;
+      }
+    }
+
+    const codePoint = text.codePointAt(start);
+    return {
+      start,
+      length: codePoint > 0xffff ? 2 : 1,
+      character: String.fromCodePoint(codePoint),
+    };
+  };
+
+  const getPreviousCodePoint = (text, index) => {
+    if (index <= 0) {
+      return undefined;
+    }
+    return getCodePointAt(text, index - 1);
   };
 
   const getWordRangeAtCursor = (editor, selection) => {
@@ -37,21 +68,27 @@ function activate(context) {
       return undefined;
     }
 
-    let index = Math.min(position.character, line.length - 1);
-    if (isWordSeparator(line[index])) {
-      if (index === 0 || isWordSeparator(line[index - 1])) {
+    let current = getCodePointAt(line, Math.min(position.character, line.length - 1));
+    if (isWordSeparator(current.character)) {
+      const previous = getPreviousCodePoint(line, current.start);
+      if (!previous || isWordSeparator(previous.character)) {
         return undefined;
       }
-      index -= 1;
+      current = previous;
     }
 
-    let start = index;
-    let end = index + 1;
-    while (start > 0 && !isWordSeparator(line[start - 1])) {
-      start -= 1;
+    let start = current.start;
+    let previous = getPreviousCodePoint(line, start);
+    while (previous && !isWordSeparator(previous.character)) {
+      start = previous.start;
+      previous = getPreviousCodePoint(line, start);
     }
-    while (end < line.length && !isWordSeparator(line[end])) {
-      end += 1;
+
+    let end = current.start + current.length;
+    let next = getCodePointAt(line, end);
+    while (next && !isWordSeparator(next.character)) {
+      end = next.start + next.length;
+      next = getCodePointAt(line, end);
     }
 
     return new vscode.Range(position.line, start, position.line, end);

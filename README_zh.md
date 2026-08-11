@@ -8,7 +8,7 @@
 
 VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具栏等大量位置沿用网页常见的手形指针。即使使用多年，这种表现依然不符合传统桌面软件的操作直觉。
 
-编辑区也有一些细节不够精确：单击词语时的边框是直角；内置出现位置高亮会同时标出其他同词内容；中文全角冒号 `：` 默认又不一定符合期望的词语边界。
+编辑区也有一些细节不够精确：单击词语时的边框是直角；内置出现位置高亮会同时标出其他同词内容；全角与半角标点的词语边界也不总是一致。
 
 本仓库只解决这些交互痛点，不重设语法配色，但会为所有深色主题统一编辑区和菜单的交互状态颜色。
 
@@ -17,7 +17,7 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 - 普通工作台控件使用默认箭头指针。
 - 编辑文本保留 I 形指针；普通超链接、ARIA 链接、Monaco 链接、欢迎页 Start 启动入口以及 Ctrl+单击“转到定义”等真实导航仍使用手形指针。
 - 单击词语时只框住光标所在的当前实例。
-- 中文全角冒号 `：` 被识别为词语分隔符，例如单击 `账号密码：root` 中的 `root` 不会框住前半段。
+- Unicode 空白、标点和符号不分全角或半角，全部作为词语边界。例如单击 `hello,你好吗` 或 `hello，你好吗` 中的 `hello`，只会框住 `hello`。
 - 当前词边框、文本选区和菜单悬停状态使用圆角。
 - 所有深色主题统一使用当前词边框/底色、当前行底色、选区底色、菜单悬停底色，以及白色选中文字。
 - 不包含 `workbench.colorCustomizations`、`editor.tokenColorCustomizations` 或主题自动切换配置。
@@ -28,13 +28,13 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 |---|---|
 | `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
 | `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
-| `extensions/local.editor-interactions-2.1.3/` | 精确当前词边框和深色模式白色选中文字的本地扩展 |
+| `extensions/local.editor-interactions-2.1.4/` | 支持 Unicode 边界的当前词框选和深色模式选区样式扩展 |
 
 ## 安装
 
 1. 克隆或下载本仓库。
 2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-3. 将 `extensions/local.editor-interactions-2.1.3` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+3. 将 `extensions/local.editor-interactions-2.1.4` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 4. 选择一种 CSS 加载方式。
 
 ### 使用 VSCode Vibrancy Continued 加载
@@ -74,4 +74,5 @@ VS Code 升级可能覆盖 CSS 加载器或 Vibrancy 写入的工作台文件，
 
 - 本仓库不指定或安装任何配色主题。
 - 深色主题统一使用：当前词边框 `#4399F9`、当前词内部底色 `#033E5D`、当前行底色 `#2B2D30`、选区底色 `#214283`、菜单悬停底色 `#2A4371`，选中文字为白色；浅色主题继续使用自身的交互配色。
+- 当前词命中使用 Unicode 标点与符号分类，因此全角/半角标点、`_`、`$`、数学符号、货币符号和 Emoji 都会形成边界。
 - `editor.occurrencesHighlight: "off"` 会关闭其他同词位置的自动高亮，这是实现“只框当前词”的一部分。
