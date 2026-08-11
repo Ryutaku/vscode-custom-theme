@@ -2,12 +2,28 @@ const vscode = require('vscode');
 
 function activate(context) {
   const editorsWithMouseWordFrame = new WeakSet();
+  const editorsWithMouseWordSelection = new WeakSet();
 
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
     backgroundColor: '#214283',
+    borderRadius: '4px',
     textDecoration: 'none; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important;',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
+  });
+
+  const selectedWordStyle = vscode.window.createTextEditorDecorationType({
+    color: '#FFFFFF',
+    backgroundColor: 'var(--vscode-editor-wordHighlightBackground, var(--vscode-editor-selectionBackground))',
+    border: '1px solid',
+    borderColor: 'var(--vscode-editor-wordHighlightBorder, var(--vscode-focusBorder))',
+    borderRadius: '4px',
+    textDecoration: 'none; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important;',
+    rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
+    dark: {
+      backgroundColor: '#033E5D',
+      borderColor: '#4399F9',
+    },
   });
 
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
@@ -94,6 +110,22 @@ function activate(context) {
     return new vscode.Range(position.line, start, position.line, end);
   };
 
+  const getExactSelectedWordRange = (editor, selection) => {
+    if (selection.isEmpty || selection.start.line !== selection.end.line) {
+      return undefined;
+    }
+
+    const line = editor.document.lineAt(selection.start.line).text;
+    if (selection.start.character === 0 && selection.end.character === line.length) {
+      return undefined;
+    }
+
+    const caretAtStart = new vscode.Selection(selection.start, selection.start);
+    const wordRange = getWordRangeAtCursor(editor, caretAtStart);
+    const selectedRange = new vscode.Range(selection.start, selection.end);
+    return wordRange?.isEqual(selectedRange) ? selectedRange : undefined;
+  };
+
   const updateSelection = (editor) => {
     if (!editor) {
       return;
@@ -102,12 +134,23 @@ function activate(context) {
     const isDarkTheme =
       vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark ||
       vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.HighContrast;
+    const hasMouseWordSelection = editorsWithMouseWordSelection.has(editor);
+    const selectedWordRanges = hasMouseWordSelection
+      ? editor.selections
+          .map((selection) => getExactSelectedWordRange(editor, selection))
+          .filter(Boolean)
+      : [];
     const selectedRanges = isDarkTheme
       ? editor.selections
-          .filter((selection) => !selection.isEmpty)
+          .filter(
+            (selection) =>
+              !selection.isEmpty &&
+              !(hasMouseWordSelection && getExactSelectedWordRange(editor, selection))
+          )
           .map((selection) => new vscode.Range(selection.start, selection.end))
       : [];
     editor.setDecorations(darkSelectedTextStyle, selectedRanges);
+    editor.setDecorations(selectedWordStyle, selectedWordRanges);
 
     const currentWordRanges = editorsWithMouseWordFrame.has(editor)
       ? editor.selections
@@ -119,15 +162,26 @@ function activate(context) {
 
   context.subscriptions.push(
     darkSelectedTextStyle,
+    selectedWordStyle,
     currentWordStyle,
     vscode.window.onDidChangeTextEditorSelection((event) => {
       const isMouseWordClick =
         event.kind === vscode.TextEditorSelectionChangeKind.Mouse &&
         event.selections.every((selection) => selection.isEmpty);
+      const isMouseWordSelection =
+        event.kind === vscode.TextEditorSelectionChangeKind.Mouse &&
+        event.selections.every((selection) =>
+          Boolean(getExactSelectedWordRange(event.textEditor, selection))
+        );
       if (isMouseWordClick) {
         editorsWithMouseWordFrame.add(event.textEditor);
       } else {
         editorsWithMouseWordFrame.delete(event.textEditor);
+      }
+      if (isMouseWordSelection) {
+        editorsWithMouseWordSelection.add(event.textEditor);
+      } else {
+        editorsWithMouseWordSelection.delete(event.textEditor);
       }
       updateSelection(event.textEditor);
     }),
