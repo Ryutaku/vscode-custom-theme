@@ -115,11 +115,6 @@ function activate(context) {
       return undefined;
     }
 
-    const line = editor.document.lineAt(selection.start.line).text;
-    if (selection.start.character === 0 && selection.end.character === line.length) {
-      return undefined;
-    }
-
     const caretAtStart = new vscode.Selection(selection.start, selection.start);
     const wordRange = getWordRangeAtCursor(editor, caretAtStart);
     const selectedRange = new vscode.Range(selection.start, selection.end);

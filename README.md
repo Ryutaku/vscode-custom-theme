@@ -77,4 +77,5 @@ The CSS relies on VS Code's workbench DOM and may require selector updates after
 - This repository does not require or install any color theme.
 - Dark themes use `#4399F9` / `#033E5D` for the current word, `#2B2D30` for the current line, `#214283` for selections, and `#2A4371` for hovered menu items. Selected text is white. Light themes retain their own interaction colors.
 - Current-word punctuation boundaries come exclusively from `editor.wordSeparators`; whitespace remains a natural boundary. Edit that setting to decide whether characters such as `_` or `$` split a word.
+- `editor.selectionHighlight: true` keeps matching instances visible after a word selection; the CSS gives those matches the single-click border/background without changing their text colors.
 - `editor.occurrencesHighlight: "off"` disables automatic highlighting of matching words elsewhere; this is part of the “current word only” behavior.
