@@ -1,0 +1,83 @@
+{
+    // Custom CSS and JS Loader
+    "vscode_custom_css.imports": [
+        "file:///C:/path/to/vscode-custom-theme/vscode-custom.css"
+    ],
+    "vscode_custom_css.policy": true,
+
+    // Dark 主题中的普通文字和选中文字
+    "editor.tokenColorCustomizations": {
+        "[Atom One Dark]": {
+            "textMateRules": [
+                {
+                    "scope": "*",
+                    "settings": {
+                        "foreground": "#FFFFFF"
+                    }
+                }
+            ]
+        }
+    },
+
+    "workbench.colorCustomizations": {
+        "[Atom One Dark]": {
+            "button.background": "#0078D4",
+            "button.hoverBackground": "#006ABB",
+            "button.secondaryBackground": "#0078D4",
+            "button.secondaryHoverBackground": "#006ABB",
+            "focusBorder": "#0078D4",
+            "textLink.foreground": "#0078D4",
+            "textLink.activeForeground": "#0078D4",
+            "inputOption.activeBackground": "#0078D4",
+            "menu.selectionBackground": "#2B50AA",
+            "menu.selectionForeground": "#FFFFFF",
+            "editor.selectionBackground": "#2B50AA",
+            "editor.selectionForeground": "#FFFFFF",
+            "editor.wordHighlightBackground": "#0078D41F",
+            "editor.wordHighlightBorder": "#0078D4",
+            "editor.wordHighlightStrongBackground": "#0078D42E",
+            "editor.wordHighlightStrongBorder": "#0078D4",
+            "editorCursor.foreground": "#0078D4",
+            "terminalCursor.foreground": "#0078D4"
+        },
+
+        "[Atom One Light]": {
+            "button.background": "#198754",
+            "button.foreground": "#FFFFFF",
+            "button.hoverBackground": "#157347",
+            "button.secondaryBackground": "#D1E7DD",
+            "button.secondaryForeground": "#0F5132",
+            "button.secondaryHoverBackground": "#BADBCC",
+            "focusBorder": "#198754",
+            "textLink.foreground": "#198754",
+            "textLink.activeForeground": "#146C43",
+            "inputOption.activeBackground": "#198754",
+            "inputOption.activeForeground": "#FFFFFF",
+            "inputOption.activeBorder": "#198754",
+            "menu.selectionBackground": "#D1E7DD",
+            "menu.selectionForeground": "#0F5132",
+            "editorActionList.focusBackground": "#D1E7DD",
+            "editorActionList.focusForeground": "#0F5132",
+            "editor.selectionBackground": "#E09D00",
+            "editor.selectionForeground": "#FFFFFF",
+            "editor.wordHighlightBackground": "#D1E7DD",
+            "editor.wordHighlightBorder": "#E09D00",
+            "editor.wordHighlightStrongBackground": "#BADBCC",
+            "editor.wordHighlightStrongBorder": "#E09D00",
+            "editorCursor.foreground": "#E09D00",
+            "terminalCursor.foreground": "#E09D00"
+        }
+    },
+
+    // 让中文全角冒号成为词语边界；自定义扩展负责精确的单击词语边框
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?：",
+    "editor.occurrencesHighlight": "off",
+
+    // 光标颜色由当前主题控制，避免 IME 扩展覆盖
+    "ime-and-cursor.cursorColor.enable": false,
+
+    "window.menuStyle": "custom",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Atom One Dark",
+    "workbench.preferredLightColorTheme": "Atom One Light"
+}
