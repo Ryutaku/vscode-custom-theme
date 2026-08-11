@@ -1,6 +1,6 @@
 # vscode-custom-theme
 
-一套可复用的 VS Code Atom One Dark / Atom One Light 双主题定制，包含按主题分别配置的配色、圆角菜单悬停状态、桌面式鼠标指针、按主题作用域设置的选中文字颜色、精确的当前词语边框，以及 Windows 下可选的原生 Mica / Acrylic 窗口材质。
+一套可复用的 VS Code Atom One Dark / Atom One Light 双主题定制，包含按主题分别配置的配色、圆角菜单悬停状态、桌面式鼠标指针、按主题作用域设置的选中文字颜色，以及精确的当前词语边框。
 
 [English README](README.md)
 
@@ -31,7 +31,6 @@ Atom One Dark 和 Atom One Light 是我比较喜欢的两款主题配色，但�
 - 单击词语时只框住当前实例，并关闭 VS Code 对其他同词位置的内置自动高亮；中文全角冒号 `：` 会被正确识别为词语边界。
 - 编辑区文字保持 I 形光标，普通工作台控件使用默认箭头；Ctrl+单击“转到定义”等真正的导航操作仍保留手形指针。
 - Dark 与 Light 配置可以共存，也可以跟随 Windows 深浅色模式自动切换。
-- Windows 11 可以通过可恢复脚本，在半透明 Atom One 界面背后启用原生 Mica 或 Acrylic 材质。
 
 ## 效果截图
 
@@ -62,8 +61,6 @@ Atom One Dark 和 Atom One Light 是我比较喜欢的两款主题配色，但�
 | `vscode-custom.css` | 工作台鼠标指针、菜单、圆角和编辑区视觉样式 |
 | `settings-snippet.jsonc` | 需要合并进 VS Code 用户设置的主题配置片段 |
 | `extensions/local.selection-white-1.2.1/` | 实现主题感知选区文字和精确当前词边框的本地扩展 |
-| `scripts/vscode-material.ps1` | 启用、切换、查看或关闭 Windows 原生背景材质 |
-| `tests/vscode-material.Tests.ps1` | 验证各材质模式能够准确应用并完整撤销 |
 
 ## 安装
 
@@ -74,28 +71,6 @@ Atom One Dark 和 Atom One Light 是我比较喜欢的两款主题配色，但�
 5. 将 `extensions/local.selection-white-1.2.1` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 6. 在命令面板执行 **Enable Custom CSS and JS** 或 **Reload Custom CSS and JS**。
 7. 执行 **Developer: Reload Window**。
-
-## Windows Mica 与 Acrylic
-
-材质层是面向 Windows 11 的可选功能。VS Code 目前没有把 Electron 的原生背景材质开放成设置项，因此脚本会在当前安装版本的 `out/main.js` 中加入两处带有明确标记的小修改：启用所选材质和 Chromium Alpha 通道、移除 VS Code 自己的不透明启动背景色，并阻止主题服务在工作台加载完成后再次用实色盖住材质。脚本会在原文件旁创建安全备份；正常关闭材质时只删除本仓库加入的代码，不会整份恢复备份，因此不会覆盖其他修改。
-
-在本仓库目录中打开 PowerShell，然后选择需要的模式：
-
-```powershell
-# 类似 Windows Terminal 的半透明模糊效果
-powershell -ExecutionPolicy Bypass -File .\scripts\vscode-material.ps1 acrylic
-
-# 更安静、稳定的全窗口材质
-powershell -ExecutionPolicy Bypass -File .\scripts\vscode-material.ps1 mica
-
-# 查看状态，或者只删除本仓库加入的补丁
-powershell -ExecutionPolicy Bypass -File .\scripts\vscode-material.ps1 status
-powershell -ExecutionPolicy Bypass -File .\scripts\vscode-material.ps1 disable
-```
-
-切换模式后需要彻底退出并重新打开所有 VS Code 窗口。如果安装目录受保护，请用管理员身份运行 PowerShell。如果未来 VS Code 不再包含脚本预期的唯一窗口创建位置，脚本会安全停止，不会猜测性修改程序文件。
-
-脚本还接受 Electron 的 `tabbed` 和 `auto` 材质模式。透明度集中定义在 `vscode-custom.css` 末尾的 `Windows Mica / Acrylic material layer` 区域，便于自行微调。
 
 ## 配色
 
@@ -108,15 +83,9 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vscode-material.ps1 disable
 
 ## VS Code 升级
 
-VS Code 升级会覆盖生成的 `workbench.html`，并安装新的 `out/main.js`，但不会影响本仓库中的源文件。升级后需要：
-
-1. 重新执行 **Reload Custom CSS and JS**。
-2. 再运行一次 `scripts/vscode-material.ps1 acrylic`，或换成你使用的其他材质。
-3. 彻底重启 VS Code。
+VS Code 升级会覆盖生成的 `workbench.html`，但不会影响本仓库中的源文件。升级后重新执行 **Reload Custom CSS and JS**，然后重启 VS Code 即可。
 
 自定义 CSS 依赖 VS Code 工作台 DOM；如果未来大版本调整界面结构，部分选择器可能需要同步更新。
-
-原生材质补丁不是 VS Code 官方设置。它被设计得尽量小且可恢复，但未来 Electron 或 VS Code 发生变化时，脚本仍可能需要同步调整。
 
 ## 说明
 
