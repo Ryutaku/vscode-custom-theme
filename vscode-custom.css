@@ -107,6 +107,7 @@ select * {
 .monaco-workbench * {
     cursor: default !important;
 }
+
 /* 白名单：文本输入保留 I 形 */
 .monaco-editor textarea,
 .monaco-editor .view-line,
@@ -117,6 +118,19 @@ select * {
 .monaco-inputbox textarea {
     cursor: text !important;
 }
+
+/* 白名单：真正的超链接和导航元素保留手形 */
+.monaco-workbench a[href],
+.monaco-workbench a[href] *,
+.monaco-workbench [role="link"],
+.monaco-workbench [role="link"] *,
+.monaco-workbench .monaco-link,
+.monaco-workbench .monaco-link *,
+.monaco-workbench .text-link,
+.monaco-workbench .text-link * {
+    cursor: pointer !important;
+}
+
 .monaco-editor .goto-definition-link {
     cursor: pointer !important;
 }
