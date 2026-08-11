@@ -1,17 +1,35 @@
 # vscode-custom-theme
 
-A reusable VS Code customization for Atom One Dark and Atom One Light. It combines theme-scoped colors, rounded menu states, desktop-style mouse cursors, theme-aware selected-text colors, and precise word highlighting.
+A reusable VS Code customization for Atom One Dark and Atom One Light. It combines theme-scoped colors, rounded menu hover states, desktop-style mouse cursors, theme-scoped selected-text foregrounds, and precise word highlighting.
 
 [中文说明](README_zh.md)
 
+## Why this repository exists
+
+This repository grew out of two long-standing VS Code usability pain points.
+
+### 1. A desktop application that often feels like a web page
+
+VS Code is a desktop application, but many parts of its interface copy the web convention of showing a pointing-hand cursor over buttons, menus, tabs, toolbar actions, and similar controls. That behavior has always felt out of place to me. Even after using VS Code for more than a decade, I still have not grown comfortable with it.
+
+This customization restores a desktop-style interaction model: ordinary workbench controls use the default arrow, editable text keeps the I-beam, and genuine navigation interactions such as Ctrl+click “go to definition” can still use the pointer.
+
+### 2. Great Atom One themes with interaction details left unfinished
+
+Atom One Dark and Atom One Light are two of my favorite VS Code color themes, but their editor interaction states still leave room for improvement. For example, clicking a word produces a sharp rectangular border that feels inconsistent with VS Code's rounded visual language. Text selection, focus, and current-word highlighting can also look too similar, making it harder to judge exactly what is selected or focused.
+
+This repository refines those details with rounded current-word borders, clearer selection colors, theme-scoped selected-text foregrounds, and more coherent menu, focus, cursor, and highlight states for both themes.
+
+These are intentionally opinionated usability adjustments rather than a claim that one visual style fits everyone. Try them in daily use, compare the interaction states yourself, and adapt the settings to your own preferences.
+
 ## Features
 
-- Atom One Dark keeps the blue palette used by the original setup.
+- Atom One Dark keeps its blue accent character while making interaction states clearer.
 - Atom One Light uses a green UI palette with a deep-yellow editor selection and cursor.
 - Menu items use rounded hover backgrounds while submenus remain correctly scoped.
 - Editor selection text stays white in both themes.
-- Clicking a word highlights only that word, including text separated by the full-width Chinese colon `：`.
-- Editor text keeps the I-beam cursor; ordinary workbench controls use the default arrow.
+- Clicking a word frames only the current instance; the built-in highlighting of other occurrences is disabled. Text separated by the full-width Chinese colon `：` is handled correctly.
+- Editor text keeps the I-beam cursor; ordinary workbench controls use the default arrow, while genuine navigation actions such as Ctrl+click keep the pointer.
 - Theme colors coexist and can follow the Windows light/dark mode automatically.
 
 ## Screenshots
