@@ -1,38 +1,53 @@
-# VS Code 自定义光标样式
+# vscode-custom-theme
 
-将 VS Code 的鼠标样式恢复为系统默认箭头指针。
+一套可复用的 VS Code Atom One Dark / Atom One Light 双主题定制，包含主题独立配色、圆角菜单状态、桌面式鼠标指针、随主题变化的选区文字，以及精确的当前词语边框。
 
-在 VS Code 里，很多本应是「箭头」的地方（标签页、工具栏、资源管理器、设置页……）默认会显示「手形」光标。  
-这份 CSS 把所有**非编辑区**的 `cursor:pointer / grab` 统一改回默认指针，**保留编辑器内文本 I-beam 与 Ctrl+跳转小手**，让界面回归传统桌面软件直觉。
+[English README](README.md)
 
----
+## 功能
 
-## 🚀 一键食用
+- Atom One Dark 保留原有蓝色体系。
+- Atom One Light 使用绿色界面色，编辑区选区和光标使用深黄色。
+- 菜单悬停项使用圆角背景，父菜单不会错误地给整个子菜单着色。
+- 两套主题下的编辑区选中文字均为纯白色。
+- 单击词语时只框住当前词；中文全角冒号 `：` 会被正确识别为词语边界。
+- 编辑区文字保持 I 形光标，普通工作台控件使用默认箭头。
+- Dark 与 Light 配置可以共存，也可以跟随 Windows 深浅色模式自动切换。
 
-1. 安装插件 [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css)  
-2. 把本仓库 `vscode-default-cursor.css` 保存到本地任意路径（例如： `C:\\Users\\Administrator\\Documents\\vscode-default-cursor.css`）  
-3. 打开 VS Code 的**用户设置 settings.json** → 填入刚才的文件绝对路径  
-   ```
-    "vscode_custom_css.imports": [
-        "file:///C:\\Users\\Administrator\\Documents\\vscode-default-cursor.css" // <-- 替换为你自己的 CSS 文件路径
-    ],
-   ``` 
-4. 按下 `Ctrl + Shift + P` 打开 VS Code 的命令面板，输入并选择 “Reload Custom CSS and JS”，随后 VS Code 会自动重启  
-5. 享受「全屏都是箭头」的清爽体验！
+## 文件说明
 
----
-
-## 🎯 覆盖范围
-
-| 区域 | 改造后光标 |
+| 路径 | 用途 |
 |---|---|
-| 标签页（含关闭、拆分图标） | ➡️ 默认指针 |
-| 活动栏（左侧一排图标） | ➡️ 默认指针 |
-| 资源管理器 / 扩展市场 | ➡️ 默认指针 |
-| 菜单栏 & 下拉菜单 | ➡️ 默认指针 |
-| 命令面板 | ➡️ 默认指针 |
-| 设置页左侧树、下拉框、复选框 | ➡️ 默认指针 |
-| 工具栏、状态栏、通知按钮 | ➡️ 默认指针 |
-| **代码编辑区** | 文本 I-beam 保留；Ctrl+跳转小手保留 |
+| `vscode-custom.css` | 工作台鼠标指针、菜单、圆角和编辑区视觉样式 |
+| `settings-snippet.jsonc` | 需要合并进 VS Code 用户设置的主题配置片段 |
+| `extensions/local.selection-white-1.2.1/` | 实现主题感知选区文字和精确当前词边框的本地扩展 |
 
----
+## 安装
+
+1. 安装 [Atom One Dark Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onedark)、[Atom One Light Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onelight) 和 [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css)。
+2. 克隆或下载本仓库。
+3. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
+4. 把 `vscode_custom_css.imports` 改为本机 `vscode-custom.css` 的绝对 `file:///` URL。
+5. 将 `extensions/local.selection-white-1.2.1` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+6. 在命令面板执行 **Enable Custom CSS and JS** 或 **Reload Custom CSS and JS**。
+7. 执行 **Developer: Reload Window**。
+
+## 配色
+
+| 场景 | Atom One Dark | Atom One Light |
+|---|---:|---:|
+| 主色 | `#0078D4` | `#198754` |
+| 菜单悬停 | `#2B50AA` | `#D1E7DD` |
+| 编辑区选区 | `#2B50AA` | `#E09D00` |
+| 光标与当前词边框 | `#0078D4` | `#E09D00` |
+
+## VS Code 升级
+
+VS Code 升级会覆盖生成的 `workbench.html`，但不会影响本仓库中的源文件。升级后重新执行 **Reload Custom CSS and JS**，然后重启 VS Code 即可。
+
+自定义 CSS 依赖 VS Code 工作台 DOM；如果未来大版本调整界面结构，部分选择器可能需要同步更新。
+
+## 说明
+
+- `settings-snippet.jsonc` 只包含本次定制相关设置，已排除账号、密码、许可证、服务器地址和命令历史等私人信息。
+- 本地扩展会关闭内置的符号出现位置高亮，并依据 `editor.wordSeparators` 绘制精确的当前词边框。

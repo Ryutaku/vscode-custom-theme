@@ -1,0 +1,162 @@
+﻿/* ===== 0. 编辑区保持原样 ===== */
+.monaco-editor .view-lines {
+    cursor: text !important;
+}
+
+.monaco-editor .margin {
+    cursor: default !important;
+}
+
+.monaco-editor .goto-definition-link {
+    cursor: pointer !important;
+}
+
+/* ===== 1. 标签页 ===== */
+.tab * {
+    cursor: default !important;
+}
+
+.tabs-and-actions-container * {
+    cursor: default !important;
+}
+
+/* ===== 2. 菜单栏（File / Edit / Selection…）和下拉项 ===== */
+.monaco-workbench .part.menubar,
+.monaco-workbench .part.menubar * {
+    cursor: default !important;
+}
+
+.monaco-menu .monaco-action-bar .action-item,
+.monaco-menu .monaco-action-bar .action-item * {
+    cursor: default !important;
+}
+
+/* ===== 3. 命令面板 / Quick Input ===== */
+.monaco-quick-open-widget,
+.monaco-quick-open-widget * {
+    cursor: default !important;
+}
+
+/* ===== 4. 其余常见“抓手”窝点补刀 ===== */
+.monaco-workbench .part.activitybar,
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.panel,
+.monaco-workbench .part.titlebar {
+    cursor: default !important;
+}
+
+/* ===== 5. 资源管理器（Explorer）所有节点 & 图标 ===== */
+.monaco-workbench .explorer-viewlet,
+.monaco-workbench .explorer-viewlet * {
+    cursor: default !important;
+}
+
+/* ===== 6. 扩展市场（Extensions 视图）所有卡片 & 按钮 ===== */
+.monaco-workbench .extensions-viewlet,
+.monaco-workbench .extensions-viewlet * {
+    cursor: default !important;
+}
+
+/* ===== 7. 工具栏 ===== */
+.monaco-toolbar * {
+    cursor: default !important;
+}
+
+/* ===== 8. 状态栏 ===== */
+.statusbar-item * {
+    cursor: default !important;
+    /* 状态栏 */
+}
+
+/* ===== 9. 左侧 ===== */
+.monaco-action-bar .action-item * {
+    cursor: default !important;
+    /* 状态栏右侧的图标们 */
+}
+
+/* ===== 7. 设置界面（Settings UI）左侧导航树 ===== */
+.monaco-tl-row * {
+    cursor: default !important;
+}
+
+
+/* ===== 8. 设置页面里的所有下拉框 & 复选框 ===== */
+select,
+select * {
+    cursor: default !important;
+}
+
+.notification-list-item * {
+    cursor: default !important;
+    /* 通知 */
+}
+
+.button-container * {
+    cursor: default !important;
+    /* 按钮 */
+}
+
+/* 强制所有插件界面使用雅黑 */
+.extension-editor,
+.extension-editor .body,
+.monaco-workbench .part>.content {
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif !important;
+}
+
+/* ===== 全局兜底：漏网的手形一律改箭头 ===== */
+.monaco-workbench * {
+    cursor: default !important;
+}
+/* 白名单：文本输入保留 I 形 */
+.monaco-editor textarea,
+.monaco-editor .view-line,
+.monaco-editor .view-line *,
+.monaco-editor .view-lines,
+.monaco-editor .view-lines *,
+.monaco-inputbox input,
+.monaco-inputbox textarea {
+    cursor: text !important;
+}
+.monaco-editor .goto-definition-link {
+    cursor: pointer !important;
+}
+
+/* ===== 菜单悬停项：强制使用主题蓝 ===== */
+.monaco-menu .monaco-action-bar .action-item.focused > .action-menu-item,
+.monaco-menu .monaco-action-bar .action-item:hover > .action-menu-item,
+.monaco-menu-option:hover,
+.monaco-menu-option:focus,
+.monaco-menu-option.focused,
+.monaco-menu-option[aria-selected="true"] {
+    background-color: var(--vscode-menu-selectionBackground) !important;
+    color: var(--vscode-menu-selectionForeground) !important;
+    border-radius: 5px !important;
+}
+
+.monaco-menu .action-item.focused > .action-menu-item *,
+.monaco-menu .action-item:hover > .action-menu-item *,
+.monaco-menu-option:hover *,
+.monaco-menu-option:focus *,
+.monaco-menu-option.focused *,
+.monaco-menu-option[aria-selected="true"] * {
+    color: var(--vscode-menu-selectionForeground) !important;
+}
+
+/* ===== 单词高亮圆角边框 ===== */
+.monaco-editor .wordHighlight,
+.monaco-editor .wordHighlightStrong,
+.monaco-editor .wordHighlightText {
+    border-radius: 4px !important;
+}
+
+/* selection rounded corners */
+.monaco-editor .selected-text {
+    border-radius: 4px !important;
+}
+
+/* 选中文字强制为纯白色。Monaco 给选中文字使用的是
+   inline-selected-text，而 selected-text 只是选区背景层。 */
+.monaco-editor .view-lines .view-line span.inline-selected-text {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
