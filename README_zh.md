@@ -28,13 +28,13 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 |---|---|
 | `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
 | `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
-| `extensions/local.precise-current-word-2.0.0/` | 只框住光标所在词语的本地扩展 |
+| `extensions/local.editor-interactions-2.1.0/` | 精确当前词边框和深色模式白色选中文字的本地扩展 |
 
 ## 安装
 
 1. 克隆或下载本仓库。
 2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-3. 将 `extensions/local.precise-current-word-2.0.0` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+3. 将 `extensions/local.editor-interactions-2.1.0` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 4. 选择一种 CSS 加载方式。
 
 ### 使用 VSCode Vibrancy Continued 加载
@@ -73,5 +73,5 @@ VS Code 升级可能覆盖 CSS 加载器或 Vibrancy 写入的工作台文件，
 ## 说明
 
 - 本仓库不指定或安装任何配色主题。
-- 本地扩展使用当前主题的 `editor.wordHighlightBorder` 颜色，不提供自定义色值。
+- 本地扩展使用当前主题的 `editor.wordHighlightBorder` 绘制当前词边框，并只在深色/高对比深色模式为实际选区添加白色文字装饰。
 - `editor.occurrencesHighlight: "off"` 会关闭其他同词位置的自动高亮，这是实现“只框当前词”的一部分。

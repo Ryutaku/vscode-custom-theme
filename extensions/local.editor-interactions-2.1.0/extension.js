@@ -1,6 +1,11 @@
 const vscode = require('vscode');
 
 function activate(context) {
+  const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
+    color: '#FFFFFF',
+    rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
+  });
+
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
     border: '1px solid',
     borderColor: new vscode.ThemeColor('editor.wordHighlightBorder'),
@@ -51,6 +56,16 @@ function activate(context) {
       return;
     }
 
+    const isDarkTheme =
+      vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark ||
+      vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.HighContrast;
+    const selectedRanges = isDarkTheme
+      ? editor.selections
+          .filter((selection) => !selection.isEmpty)
+          .map((selection) => new vscode.Range(selection.start, selection.end))
+      : [];
+    editor.setDecorations(darkSelectedTextStyle, selectedRanges);
+
     const currentWordRanges = editor.selections
       .map((selection) => getWordRangeAtCursor(editor, selection))
       .filter(Boolean);
@@ -58,6 +73,7 @@ function activate(context) {
   };
 
   context.subscriptions.push(
+    darkSelectedTextStyle,
     currentWordStyle,
     vscode.window.onDidChangeTextEditorSelection((event) => {
       updateSelection(event.textEditor);
@@ -69,6 +85,9 @@ function activate(context) {
       if (event.affectsConfiguration('editor.wordSeparators')) {
         updateSelection(vscode.window.activeTextEditor);
       }
+    }),
+    vscode.window.onDidChangeActiveColorTheme(() => {
+      vscode.window.visibleTextEditors.forEach(updateSelection);
     })
   );
 
