@@ -30,13 +30,13 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 |---|---|
 | `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
 | `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
-| `extensions/local.editor-interactions-2.2.1/` | 按设置处理单击、词语选中、相同词标记和深色模式选区样式的扩展 |
+| `extensions/local.editor-interactions-2.2.2/` | 按设置处理单击、词语选中和深色模式选区样式的扩展 |
 
 ## 安装
 
 1. 克隆或下载本仓库。
 2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-3. 将 `extensions/local.editor-interactions-2.2.1` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+3. 将 `extensions/local.editor-interactions-2.2.2` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 4. 选择一种 CSS 加载方式。
 
 ### 使用 VSCode Vibrancy Continued 加载
@@ -77,5 +77,5 @@ VS Code 升级可能覆盖 CSS 加载器或 Vibrancy 写入的工作台文件，
 - 本仓库不指定或安装任何配色主题。
 - 深色主题统一使用：当前词边框 `#4399F9`、当前词内部底色 `#033E5D`、当前行底色 `#2B2D30`、选区底色 `#214283`、菜单悬停底色 `#2A4371`，选中文字为白色；浅色主题继续使用自身的交互配色。
 - 当前词的标点边界完全取自 `editor.wordSeparators`，空白仍是天然边界。是否用 `_`、`$` 等字符切分词语，可直接通过该设置决定。
-- `editor.selectionHighlight: false` 会关闭 VS Code 按主题着色的相同词标记；本地扩展会查找边界完整的相同词，并应用单击词的边框和底色，同时保留其文字颜色。
+- `editor.selectionHighlight: true` 让相同词查找继续使用 VS Code 原生文本模型；CSS 只修改匹配项的边框和底色，本地扩展不会扫描文档。
 - `editor.occurrencesHighlight: "off"` 会关闭其他同词位置的自动高亮，这是实现“只框当前词”的一部分。

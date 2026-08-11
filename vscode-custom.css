@@ -168,6 +168,7 @@ select * {
 }
 
 /* ===== 单词与相同词高亮 ===== */
+.monaco-editor .selectionHighlight,
 .monaco-editor .wordHighlight,
 .monaco-editor .wordHighlightStrong,
 .monaco-editor .wordHighlightText {
@@ -183,6 +184,12 @@ select * {
 }
 
 /* ===== 深色主题统一编辑区交互色 ===== */
+.monaco-workbench.vs-dark,
+.monaco-workbench.hc-black {
+    --vscode-editor-selectionHighlightBackground: #033E5D !important;
+    --vscode-editor-selectionHighlightBorder: #4399F9 !important;
+}
+
 .monaco-workbench.vs-dark .monaco-editor .view-overlays .current-line,
 .monaco-workbench.hc-black .monaco-editor .view-overlays .current-line {
     background-color: #2B2D30 !important;
@@ -194,9 +201,11 @@ select * {
     background-color: transparent !important;
 }
 
+.monaco-workbench.vs-dark .monaco-editor .selectionHighlight,
 .monaco-workbench.vs-dark .monaco-editor .wordHighlight,
 .monaco-workbench.vs-dark .monaco-editor .wordHighlightStrong,
 .monaco-workbench.vs-dark .monaco-editor .wordHighlightText,
+.monaco-workbench.hc-black .monaco-editor .selectionHighlight,
 .monaco-workbench.hc-black .monaco-editor .wordHighlight,
 .monaco-workbench.hc-black .monaco-editor .wordHighlightStrong,
 .monaco-workbench.hc-black .monaco-editor .wordHighlightText {

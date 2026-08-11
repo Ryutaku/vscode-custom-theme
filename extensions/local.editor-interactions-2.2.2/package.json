@@ -2,7 +2,7 @@
   "name": "editor-interactions",
   "displayName": "Editor Interaction Refinements",
   "description": "Adds settings-driven current-word framing and consistent dark-theme selections.",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "publisher": "local",
   "engines": {
     "vscode": "^1.90.0"
