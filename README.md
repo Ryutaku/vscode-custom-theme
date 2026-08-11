@@ -15,7 +15,7 @@ This repository addresses only those interaction issues and leaves all color dec
 ## Features
 
 - Ordinary workbench controls use the default arrow cursor.
-- Editable text keeps the I-beam; regular hyperlinks, ARIA links, Monaco links, and genuine navigation such as Ctrl+click “go to definition” keep the pointer.
+- Editable text keeps the I-beam; regular hyperlinks, ARIA links, Monaco links, Welcome-page Start actions, and genuine navigation such as Ctrl+click “go to definition” keep the pointer.
 - Clicking a word frames only the instance at the caret.
 - The full-width Chinese colon `：` acts as a word separator, so clicking `root` in `账号密码：root` does not include the preceding label.
 - Current-word borders, text selections, and menu hover states have rounded corners.

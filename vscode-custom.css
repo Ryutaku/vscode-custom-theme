@@ -131,6 +131,12 @@ select * {
     cursor: pointer !important;
 }
 
+/* 欢迎页 Start 区域使用 button-link，但语义上是打开/创建/连接入口 */
+.monaco-workbench .gettingStartedContainer .start-container .button-link,
+.monaco-workbench .gettingStartedContainer .start-container .button-link * {
+    cursor: pointer !important;
+}
+
 .monaco-editor .goto-definition-link {
     cursor: pointer !important;
 }
