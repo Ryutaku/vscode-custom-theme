@@ -1,8 +1,6 @@
 const vscode = require('vscode');
 
 function activate(context) {
-  const unicodeBoundaryPattern = /[\s\p{P}\p{S}]/u;
-
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
     backgroundColor: '#214283',
@@ -24,8 +22,8 @@ function activate(context) {
   const isWordSeparator = (character) => {
     const separators = vscode.workspace
       .getConfiguration('editor')
-      .get('wordSeparators', "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?：");
-    return unicodeBoundaryPattern.test(character) || separators.includes(character);
+      .get('wordSeparators', "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?，。；：！？、（）【】［］｛｝《》〈〉“”‘’「」『』〔〕…—·～￥＂＃＄％＆＇＊＋－．／＜＝＞＠＼＾＿｀｜");
+    return /\s/u.test(character) || separators.includes(character);
   };
 
   const getCodePointAt = (text, index) => {
