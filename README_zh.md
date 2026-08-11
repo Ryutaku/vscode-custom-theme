@@ -17,6 +17,7 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 - 普通工作台控件使用默认箭头指针。
 - 编辑文本保留 I 形指针；普通超链接、ARIA 链接、Monaco 链接、欢迎页 Start 启动入口以及 Ctrl+单击“转到定义”等真实导航仍使用手形指针。
 - 单击词语时只框住光标所在的当前实例。
+- 当前词边框只由鼠标单击产生；输入文字、键盘移动光标或执行命令时会清除边框，不再让边框跟随光标。
 - 标点边界以 `editor.wordSeparators` 为唯一来源。仓库提供的配置包含常见半角、中文和全角标点，因此单击 `hello,你好吗` 或 `hello，你好吗` 中的 `hello`，都只会框住 `hello`。
 - 当前词边框、文本选区和菜单悬停状态使用圆角。
 - 所有深色主题统一使用当前词边框/底色、当前行底色、选区底色、菜单悬停底色，以及白色选中文字。
@@ -28,13 +29,13 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 |---|---|
 | `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
 | `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
-| `extensions/local.editor-interactions-2.1.5/` | 按设置判断当前词边界和处理深色模式选区样式的扩展 |
+| `extensions/local.editor-interactions-2.1.6/` | 按设置判断当前词边界和处理深色模式选区样式的扩展 |
 
 ## 安装
 
 1. 克隆或下载本仓库。
 2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-3. 将 `extensions/local.editor-interactions-2.1.5` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+3. 将 `extensions/local.editor-interactions-2.1.6` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 4. 选择一种 CSS 加载方式。
 
 ### 使用 VSCode Vibrancy Continued 加载

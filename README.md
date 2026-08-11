@@ -17,6 +17,7 @@ This repository addresses only those interaction issues. It does not redefine sy
 - Ordinary workbench controls use the default arrow cursor.
 - Editable text keeps the I-beam; regular hyperlinks, ARIA links, Monaco links, Welcome-page Start actions, and genuine navigation such as Ctrl+click “go to definition” keep the pointer.
 - Clicking a word frames only the instance at the caret.
+- The current-word frame is created only by a mouse click; typing, keyboard navigation, and commands clear it instead of making it follow the caret.
 - `editor.wordSeparators` is the single source of truth for punctuation boundaries. The supplied setting includes common half-width, Chinese, and full-width punctuation, so clicking `hello` in `hello,你好吗` or `hello，你好吗` frames only `hello`.
 - Current-word borders, text selections, and menu hover states have rounded corners.
 - Every dark theme uses the same current-word border/background, current-line background, selection background, menu-hover background, and white selected text.
@@ -28,13 +29,13 @@ This repository addresses only those interaction issues. It does not redefine sy
 |---|---|
 | `vscode-custom.css` | Workbench cursor and rounded interaction styles |
 | `settings-snippet.jsonc` | Word-boundary, occurrence-highlight, and custom-menu settings |
-| `extensions/local.editor-interactions-2.1.5/` | Local extension for settings-driven current-word framing and dark-theme selection styling |
+| `extensions/local.editor-interactions-2.1.6/` | Local extension for settings-driven current-word framing and dark-theme selection styling |
 
 ## Installation
 
 1. Clone or download this repository.
 2. Merge `settings-snippet.jsonc` into your VS Code user `settings.json`; do not replace the entire settings file.
-3. Copy `extensions/local.editor-interactions-2.1.5` into `%USERPROFILE%\.vscode\extensions\`.
+3. Copy `extensions/local.editor-interactions-2.1.6` into `%USERPROFILE%\.vscode\extensions\`.
 4. Choose one CSS loading method.
 
 ### Load with VSCode Vibrancy Continued

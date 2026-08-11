@@ -1,6 +1,8 @@
 const vscode = require('vscode');
 
 function activate(context) {
+  const editorsWithMouseWordFrame = new WeakSet();
+
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
     backgroundColor: '#214283',
@@ -107,9 +109,11 @@ function activate(context) {
       : [];
     editor.setDecorations(darkSelectedTextStyle, selectedRanges);
 
-    const currentWordRanges = editor.selections
-      .map((selection) => getWordRangeAtCursor(editor, selection))
-      .filter(Boolean);
+    const currentWordRanges = editorsWithMouseWordFrame.has(editor)
+      ? editor.selections
+          .map((selection) => getWordRangeAtCursor(editor, selection))
+          .filter(Boolean)
+      : [];
     editor.setDecorations(currentWordStyle, currentWordRanges);
   };
 
@@ -117,6 +121,14 @@ function activate(context) {
     darkSelectedTextStyle,
     currentWordStyle,
     vscode.window.onDidChangeTextEditorSelection((event) => {
+      const isMouseWordClick =
+        event.kind === vscode.TextEditorSelectionChangeKind.Mouse &&
+        event.selections.every((selection) => selection.isEmpty);
+      if (isMouseWordClick) {
+        editorsWithMouseWordFrame.add(event.textEditor);
+      } else {
+        editorsWithMouseWordFrame.delete(event.textEditor);
+      }
       updateSelection(event.textEditor);
     }),
     vscode.window.onDidChangeActiveTextEditor((editor) => {
