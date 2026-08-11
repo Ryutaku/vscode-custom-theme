@@ -4,6 +4,7 @@
     // 相同词匹配由 VS Code 原生文本模型负责，CSS 只调整显示样式
     "editor.selectionHighlight": true,
     "editor.occurrencesHighlight": "off",
+    "editor.minimap.showSlider": "always",
 
     // 自定义菜单 DOM 允许鼠标指针和圆角规则生效
     "window.menuStyle": "custom"

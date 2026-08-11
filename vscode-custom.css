@@ -212,3 +212,19 @@ select * {
     border-color: #4399F9 !important;
     background-color: #033E5D !important;
 }
+
+/* ===== 缩略图可视区域镜头 ===== */
+.monaco-workbench.vs-dark,
+.monaco-workbench.hc-black {
+    --vscode-minimapSlider-background: #20222666 !important;
+    --vscode-minimapSlider-hoverBackground: #2B2D3080 !important;
+    --vscode-minimapSlider-activeBackground: #3A3D448C !important;
+}
+
+.monaco-workbench.vs-dark .monaco-editor .minimap-slider .minimap-slider-horizontal,
+.monaco-workbench.hc-black .monaco-editor .minimap-slider .minimap-slider-horizontal {
+    border-radius: 5px !important;
+    outline: 1px solid #74798280 !important;
+    outline-offset: -1px !important;
+    box-shadow: inset 0 0 0 1px #10121566 !important;
+}

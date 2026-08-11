@@ -22,6 +22,7 @@ This repository addresses only those interaction issues. It does not redefine sy
 - `editor.wordSeparators` is the single source of truth for punctuation boundaries. The supplied setting includes common half-width, Chinese, and full-width punctuation, so clicking `hello` in `hello,你好吗` or `hello，你好吗` frames only `hello`.
 - Current-word borders, text selections, and menu hover states have rounded corners.
 - Every dark theme uses the same current-word border/background, current-line background, selection background, menu-hover background, and white selected text.
+- The minimap viewport slider stays visible and uses a restrained black-and-gray translucent lens in dark themes, with stronger hover and drag states.
 - No `workbench.colorCustomizations`, `editor.tokenColorCustomizations`, or automatic theme switching is included.
 
 ## Included files

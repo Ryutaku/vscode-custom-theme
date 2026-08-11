@@ -22,6 +22,7 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 - 标点边界以 `editor.wordSeparators` 为唯一来源。仓库提供的配置包含常见半角、中文和全角标点，因此单击 `hello,你好吗` 或 `hello，你好吗` 中的 `hello`，都只会框住 `hello`。
 - 当前词边框、文本选区和菜单悬停状态使用圆角。
 - 所有深色主题统一使用当前词边框/底色、当前行底色、选区底色、菜单悬停底色，以及白色选中文字。
+- 缩略图的可视区域镜头始终显示；深色主题使用克制的黑灰色半透明镜头，悬停和拖动时适度增强。
 - 不包含 `workbench.colorCustomizations`、`editor.tokenColorCustomizations` 或主题自动切换配置。
 
 ## 文件说明
