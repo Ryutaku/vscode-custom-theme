@@ -1,6 +1,6 @@
 # vscode-custom-theme
 
-一套基本与主题无关的 VS Code 桌面交互增强。它主要处理鼠标指针、文本命中范围和圆角交互细节，仅在深色模式下把选中文字设为白色以保持清晰对比，可与 Atom One、VSCode Vibrancy Continued 或其他任意主题共同使用。
+一套基本与主题无关的 VS Code 桌面交互增强。它主要处理鼠标指针、文本命中范围和圆角交互细节，并为所有深色主题提供一致的交互配色，可与 Atom One、One Dark Pro、VSCode Vibrancy Continued 或其他主题共同使用。
 
 [English README](README.md)
 
@@ -10,7 +10,7 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 
 编辑区也有一些细节不够精确：单击词语时的边框是直角；内置出现位置高亮会同时标出其他同词内容；中文全角冒号 `：` 默认又不一定符合期望的词语边界。
 
-本仓库只解决这些交互痛点，不再重设主题配色体系；唯一的颜色例外是深色模式下的白色选中文字。
+本仓库只解决这些交互痛点，不重设语法配色，但会为所有深色主题统一编辑区和菜单的交互状态颜色。
 
 ## 功能
 
@@ -19,7 +19,7 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 - 单击词语时只框住光标所在的当前实例。
 - 中文全角冒号 `：` 被识别为词语分隔符，例如单击 `账号密码：root` 中的 `root` 不会框住前半段。
 - 当前词边框、文本选区和菜单悬停状态使用圆角。
-- 深色主题下的选中文字强制为白色；选区背景、菜单、光标和边框颜色仍继承当前 VS Code 主题。
+- 所有深色主题统一使用当前词边框/底色、当前行底色、选区底色、菜单悬停底色，以及白色选中文字。
 - 不包含 `workbench.colorCustomizations`、`editor.tokenColorCustomizations` 或主题自动切换配置。
 
 ## 文件说明
@@ -28,13 +28,13 @@ VS Code 明明是一款桌面应用，却在按钮、菜单、Tab 页和工具�
 |---|---|
 | `vscode-custom.css` | 工作台鼠标指针和圆角交互样式 |
 | `settings-snippet.jsonc` | 词语边界、出现位置高亮和自定义菜单设置 |
-| `extensions/local.editor-interactions-2.1.2/` | 精确当前词边框和深色模式白色选中文字的本地扩展 |
+| `extensions/local.editor-interactions-2.1.3/` | 精确当前词边框和深色模式白色选中文字的本地扩展 |
 
 ## 安装
 
 1. 克隆或下载本仓库。
 2. 将 `settings-snippet.jsonc` 中的配置合并到 VS Code 用户 `settings.json`，不要覆盖完整设置文件。
-3. 将 `extensions/local.editor-interactions-2.1.2` 复制到 `%USERPROFILE%\.vscode\extensions\`。
+3. 将 `extensions/local.editor-interactions-2.1.3` 复制到 `%USERPROFILE%\.vscode\extensions\`。
 4. 选择一种 CSS 加载方式。
 
 ### 使用 VSCode Vibrancy Continued 加载
@@ -73,5 +73,5 @@ VS Code 升级可能覆盖 CSS 加载器或 Vibrancy 写入的工作台文件，
 ## 说明
 
 - 本仓库不指定或安装任何配色主题。
-- 本地扩展优先使用当前主题的 `editor.wordHighlightBorder` 绘制当前词边框，并在主题未定义时回退到 `focusBorder`；只在深色/高对比深色模式为实际选区添加白色文字装饰。
+- 深色主题统一使用：当前词边框 `#4399F9`、当前词内部底色 `#033E5D`、当前行底色 `#2B2D30`、选区底色 `#214283`、菜单悬停底色 `#2A4371`，选中文字为白色；浅色主题继续使用自身的交互配色。
 - `editor.occurrencesHighlight: "off"` 会关闭其他同词位置的自动高亮，这是实现“只框当前词”的一部分。

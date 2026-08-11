@@ -141,7 +141,7 @@ select * {
     cursor: pointer !important;
 }
 
-/* ===== 菜单悬停项：仅补充圆角，颜色完全交给当前主题 ===== */
+/* ===== 菜单悬停项 ===== */
 .monaco-menu .monaco-action-bar .action-item.focused > .action-menu-item,
 .monaco-menu .monaco-action-bar .action-item:hover > .action-menu-item,
 .monaco-menu-option:hover,
@@ -149,6 +149,22 @@ select * {
 .monaco-menu-option.focused,
 .monaco-menu-option[aria-selected="true"] {
     border-radius: 5px !important;
+}
+
+/* 深色主题统一菜单悬停色（包含一级菜单和子菜单） */
+.monaco-workbench.vs-dark .monaco-menu .monaco-action-bar .action-item.focused > .action-menu-item,
+.monaco-workbench.vs-dark .monaco-menu .monaco-action-bar .action-item:hover > .action-menu-item,
+.monaco-workbench.vs-dark .monaco-menu-option:hover,
+.monaco-workbench.vs-dark .monaco-menu-option:focus,
+.monaco-workbench.vs-dark .monaco-menu-option.focused,
+.monaco-workbench.vs-dark .monaco-menu-option[aria-selected="true"],
+.monaco-workbench.hc-black .monaco-menu .monaco-action-bar .action-item.focused > .action-menu-item,
+.monaco-workbench.hc-black .monaco-menu .monaco-action-bar .action-item:hover > .action-menu-item,
+.monaco-workbench.hc-black .monaco-menu-option:hover,
+.monaco-workbench.hc-black .monaco-menu-option:focus,
+.monaco-workbench.hc-black .monaco-menu-option.focused,
+.monaco-workbench.hc-black .monaco-menu-option[aria-selected="true"] {
+    background-color: #2A4371 !important;
 }
 
 /* ===== 单词高亮圆角边框 ===== */
@@ -161,4 +177,15 @@ select * {
 /* selection rounded corners */
 .monaco-editor .selected-text {
     border-radius: 4px !important;
+}
+
+/* ===== 深色主题统一编辑区交互色 ===== */
+.monaco-workbench.vs-dark .monaco-editor .view-overlays .current-line,
+.monaco-workbench.hc-black .monaco-editor .view-overlays .current-line {
+    background-color: #2B2D30 !important;
+}
+
+.monaco-workbench.vs-dark .monaco-editor .selected-text,
+.monaco-workbench.hc-black .monaco-editor .selected-text {
+    background-color: #214283 !important;
 }

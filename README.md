@@ -1,6 +1,6 @@
 # vscode-custom-theme
 
-A mostly theme-neutral desktop interaction layer for VS Code. It refines mouse cursors, word hit-testing, and rounded interaction states, with one deliberate color exception: selected text is white in dark mode for clear contrast. It can be used with Atom One, VSCode Vibrancy Continued, or any other theme.
+A mostly theme-neutral desktop interaction layer for VS Code. It refines mouse cursors, word hit-testing, and rounded interaction states, with a consistent interaction palette across dark themes. It can be used with Atom One, One Dark Pro, VSCode Vibrancy Continued, or other themes.
 
 [中文说明](README_zh.md)
 
@@ -10,7 +10,7 @@ VS Code is a desktop application, yet buttons, menus, tabs, and toolbar actions 
 
 The editor also has a few imprecise interaction details: clicking a word produces a sharp rectangular border, built-in occurrence highlighting marks matching words elsewhere, and the full-width Chinese colon `：` is not always treated as the desired word boundary.
 
-This repository addresses only those interaction issues and does not redefine the theme palette; white selected text in dark mode is the sole color exception.
+This repository addresses only those interaction issues. It does not redefine syntax colors, but it does use one consistent set of editor and menu interaction colors across dark themes.
 
 ## Features
 
@@ -19,7 +19,7 @@ This repository addresses only those interaction issues and does not redefine th
 - Clicking a word frames only the instance at the caret.
 - The full-width Chinese colon `：` acts as a word separator, so clicking `root` in `账号密码：root` does not include the preceding label.
 - Current-word borders, text selections, and menu hover states have rounded corners.
-- Selected text is forced to white in dark themes; selection backgrounds, menus, cursors, and borders still inherit the active VS Code theme.
+- Every dark theme uses the same current-word border/background, current-line background, selection background, menu-hover background, and white selected text.
 - No `workbench.colorCustomizations`, `editor.tokenColorCustomizations`, or automatic theme switching is included.
 
 ## Included files
@@ -28,13 +28,13 @@ This repository addresses only those interaction issues and does not redefine th
 |---|---|
 | `vscode-custom.css` | Workbench cursor and rounded interaction styles |
 | `settings-snippet.jsonc` | Word-boundary, occurrence-highlight, and custom-menu settings |
-| `extensions/local.editor-interactions-2.1.2/` | Local extension for precise current-word framing and white selected text in dark themes |
+| `extensions/local.editor-interactions-2.1.3/` | Local extension for precise current-word framing and white selected text in dark themes |
 
 ## Installation
 
 1. Clone or download this repository.
 2. Merge `settings-snippet.jsonc` into your VS Code user `settings.json`; do not replace the entire settings file.
-3. Copy `extensions/local.editor-interactions-2.1.2` into `%USERPROFILE%\.vscode\extensions\`.
+3. Copy `extensions/local.editor-interactions-2.1.3` into `%USERPROFILE%\.vscode\extensions\`.
 4. Choose one CSS loading method.
 
 ### Load with VSCode Vibrancy Continued
@@ -73,5 +73,5 @@ The CSS relies on VS Code's workbench DOM and may require selector updates after
 ## Notes
 
 - This repository does not require or install any color theme.
-- The local extension prefers the active theme's `editor.wordHighlightBorder` for the current-word frame and falls back to `focusBorder`; it applies a white-text decoration to actual selections only in dark/high-contrast-dark modes.
+- Dark themes use `#4399F9` / `#033E5D` for the current word, `#2B2D30` for the current line, `#214283` for selections, and `#2A4371` for hovered menu items. Selected text is white. Light themes retain their own interaction colors.
 - `editor.occurrencesHighlight: "off"` disables automatic highlighting of matching words elsewhere; this is part of the “current word only” behavior.

@@ -3,14 +3,20 @@ const vscode = require('vscode');
 function activate(context) {
   const darkSelectedTextStyle = vscode.window.createTextEditorDecorationType({
     color: '#FFFFFF',
+    backgroundColor: '#214283',
     textDecoration: 'none; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important;',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
   });
 
   const currentWordStyle = vscode.window.createTextEditorDecorationType({
-    border: '1px solid var(--vscode-editor-wordHighlightBorder, var(--vscode-focusBorder))',
+    border: '1px solid',
+    borderColor: 'var(--vscode-editor-wordHighlightBorder, var(--vscode-focusBorder))',
     borderRadius: '4px',
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen,
+    dark: {
+      borderColor: '#4399F9',
+      backgroundColor: '#033E5D',
+    },
   });
 
   const isWordSeparator = (character) => {
