@@ -45,6 +45,17 @@
     cursor: default !important;
 }
 
+/* 活动栏选中图标与右键菜单悬停项使用统一底色 */
+.monaco-workbench.vs-dark,
+.monaco-workbench.hc-black {
+    --vscode-activityBar-activeBackground: #2A4371 !important;
+    --vscode-activityBarTop-activeBackground: #2A4371 !important;
+    --vscode-menu-selectionBackground: #2A4371 !important;
+    --vscode-list-activeSelectionBackground: #2A4371 !important;
+    --vscode-list-inactiveSelectionBackground: #2A4371 !important;
+    --vscode-list-focusAndSelectionBackground: #2A4371 !important;
+}
+
 /* ===== 5. 资源管理器（Explorer）所有节点 & 图标 ===== */
 .monaco-workbench .explorer-viewlet,
 .monaco-workbench .explorer-viewlet * {
@@ -117,6 +128,15 @@ select * {
 .monaco-inputbox input,
 .monaco-inputbox textarea {
     cursor: text !important;
+}
+
+/* 输入框与文本域的文字选区（例如 Settings 搜索框） */
+.monaco-workbench.vs-dark .monaco-inputbox input::selection,
+.monaco-workbench.vs-dark .monaco-inputbox textarea::selection,
+.monaco-workbench.hc-black .monaco-inputbox input::selection,
+.monaco-workbench.hc-black .monaco-inputbox textarea::selection {
+    color: #FFFFFF !important;
+    background-color: #214283 !important;
 }
 
 /* 白名单：真正的超链接和导航元素保留手形 */
@@ -199,6 +219,12 @@ select * {
 .monaco-workbench.hc-black .monaco-editor .selected-text {
     /* 实际选区底色由扩展装饰负责，以便区分双击词和普通/整行选区。 */
     background-color: transparent !important;
+}
+
+/* Settings 搜索等建议输入框本身是嵌入式 Monaco，不会收到编辑器扩展装饰。 */
+.monaco-workbench.vs-dark .suggest-input-container .monaco-editor .selected-text,
+.monaco-workbench.hc-black .suggest-input-container .monaco-editor .selected-text {
+    background-color: #214283 !important;
 }
 
 .monaco-workbench.vs-dark .monaco-editor .selectionHighlight,
